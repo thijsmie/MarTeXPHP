@@ -40,15 +40,15 @@ abstract class MarTeXmodule {
 
 class ModuleTools {
     public static function setVar($var, $value) {
-        return "<".$var.">".$value."<";
+        return "$".$var."%".$value."$";
     }
     
     public static function getVars($text) {
         $vars = array();
-        $ts = explode("<",$text);
+        $ts = explode("$",$text);
         
         for($i = 0; $i < count($ts); $i+=1) {
-            $kv = explode(">", $ts[$i]);
+            $kv = explode("%", $ts[$i]);
             if (count($kv) == 2) {
                 $vars[$kv[0]] = $kv[1];
             }
@@ -58,9 +58,9 @@ class ModuleTools {
     
     public static function getText($text) {
         $txt = "";
-        $ts = explode("<", $text);
+        $ts = explode("$", $text);
         for($i = 0; $i < count($ts); $i+=1) {
-            $kv = explode(">", $ts[$i]);
+            $kv = explode("%", $ts[$i]);
             if ($kv[0] == $ts[$i]) {
                 $txt .= $kv[0];
             }

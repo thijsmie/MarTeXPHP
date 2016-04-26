@@ -1,0 +1,9 @@
+<p> The figure module exposes commands that are designed to mimick the LaTeX package graphix, with a few exceptions. Maybe the most notable exception is that these commands only work inside a figure environment, and will result in "command not found" errors if you use them elsewhere.<p>
+<h3> Implemented commands </h3>
+<p><ul>
+<li> Env:figure <h4>\includegraphics{path/to/image}</h4> 
+    <p> Use to display an image. Example:<br>
+        \begin{figure}<br>
+            \includegraphics{test.png}<br>
+        \end{figure} </li>
+<li>

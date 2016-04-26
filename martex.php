@@ -50,6 +50,8 @@ class MarTeX {
     
     private function handleCommand($command, $argument) {
         if ($command == "begin") {
+            if (is_array($argument))
+                $argument = $argument[0];
             $this->_EnvStack[] = $argument;
             return "\\begin{".$argument."}";
         }
@@ -116,11 +118,21 @@ class MarTeX {
     }
     
     private function environmentReplacePass($text) {
-        $regex = "/\\\\begin\\s*{([^{}]*)}(?:\\[(\\s*\\w\\s*)\\]|)((?:.|\\n)*)\\\\end\\s*{\\s*\\1\\s*}/imU";
+        $regex = "/\\\\begin\\s*{([^{}]*)}(?:\\[(\\s*\\w\\s*)\\]|)(?:((?:\\s*{(?:[^{}]*)})+)|)((?:.|\\n)*)\\\\end\\s*{\\s*\\1\\s*}/imU";
         preg_match_all($regex, $text, $matches);
         
         for($i = 0; $i < count($matches[0]); $i+=1) {
-		    $ntext = $this->handleEnvironment($matches[1][$i], $matches[2][$i], $matches[3][$i]);
+            if ($matches[3][$i] != "") {
+	            $step1 = str_replace_first("{","",$matches[3][$i]);
+	            $step2 = str_replace_all("}","",$step1);
+	            $step3 = explode("{", $step2);
+	            
+	            $arg = array_merge(array($matches[2][$i]),$step3);
+	        }
+	        else {
+	            $arg = $matches[2][$i];
+	        }
+		    $ntext = $this->handleEnvironment($matches[1][$i], $arg, $matches[4][$i]);
 		    $text = str_replace_first($matches[0][$i], $ntext, $text);
 	    }
 	    

@@ -29,6 +29,7 @@ class Itemize extends MarTeXmodule implements IMarTeXmodule {
     }
     
     public function handleEnvironment($env, $option, $text) {
+        //var_dump($option);
         $texts = ModuleTools::getText($text);
         $vars = ModuleTools::getVars($text);
         $text = $texts;

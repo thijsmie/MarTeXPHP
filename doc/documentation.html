@@ -1,29 +1,149 @@
 
 
 
-&ering;fine{path|/home/thijs/Dropbox/MarTeX/doc}
 
-&ering;gin{page}
 
-&iring;tle{MarTeX}
-	\hline
-	&ering;gin{paragraph}
+<html><body>
+
+<h1>MarTeX</h1>
+	<hr><p>
 		MarTeX is a versitale TeX to HTML interpreter. 
 		It comes with a few basic modules, but can easily be expanded upon. 
 		It was written by Thijs Miedema for use with marie-curie.nl.
-	\end{paragraph}
-	&ering;ction{Modules}
-		&uring;bsection{Module Document}
+	</p>
+	<h2>Modules</h2>
+		<h3>Module Document</h3>
+			<p>
+    The document module exposes the basic commands that are designed to mimick the LaTeX main environment.
+</p>
+
+<h4>Implemented commands</h4>
+<ul>
+
+    <li><i>global:</i> <b>&#92;title&#123;Title&#125;</b><br><p>Make a big fancy title.</p></li>
+
+    <li><i>global:</i> <b>&#92;section&#123;Title&#125;</b><br><p>Make a section title.</p></li>
+
+    <li><i>global:</i> <b>&#92;subsection&#123;Title&#125;</b><br><p>Make a subsection title.</p></li>
+
+    <li><i>global:</i> <b>&#92;subsubsection&#123;Title&#125;</b><br><p>Make a subsubsection title.</p></li>
+
+    <li><i>global:</i> <b>&#92;textbf&#123;Text&#125;</b><br><p>Render Text in bold.</p></li>
+
+    <li><i>global:</i> <b>&#92;textit&#123;Text&#125;</b><br><p>Render Text in italics.</p></li>
+
+    <li><i>global:</i> <b>&#92;hline</b><br><p>Make a horizontal line.</p></li>
+
+    <li><i>global:</i> <b>&#92;newline</b><br><p>Line break, equivalent to a double backslash.</p></li>
+
+    <li><i>global:</i> <b>&#92;paragraph&#123;text&#125;</b><br><p>Render the text as a paragraph, normally not noticable, but might have implications if a stylesheet is loaded. Use for a single line of text without commands only, please use the environment <i>paragraph</i> otherwise.</p></li>
+
+    <li><i>global:</i> <b>&#92;ref&#123;label&#125;</b><br><p>Reference a label (from an image, for example). Works with both forward and backwards declaration (The label can be both above and below the ref command). Outputs a question mark when the label is undefined.</p></li>
+
+    <li><i>global:</i> <b>&#92;define&#123;Variable&#125;&#123;Value&#125;</b><br><p>Set the global Variable to Value. Often used to change module behaviour.</p></li>
+
+</ul>
+
+<h4>Implemented environments</h4>
+<p>In MarTeX an environment is defined as the area between a begin and matching end command:</p>
+<pre>
+    &#92;begin&#123;Environment&#125; 
+        Environment content
+    &#92;end&#123;Environment&#125;
+</pre>
+<ul>
+
+    <li><i>document:</i> <br><p>Does basically nothing right now, but might do in the future. For now it is there for the TeX code-style idea.</p></li>
+
+    <li><i>paragraph:</i> <br><p>Does the same as the command 'paragraph', but now with begin and end commands. Works better for multiline paragraphs.</p></li>
+
+    <li><i>code:</i> <br><p>Wrapper for the html 'pre' environment. Stuff in this environment is displayed with all whitespace intact (tabs, newlines, etc)</p></li>
+
+</ul>
+
+
+<h4>Example</h4>
+<pre>
+    &#92;define&#123;marie&#125;&#123;cool&#125;
+    &#92;title&#123;My Website&#125;
+    &#92;begin&#123;document&#125;
+        &#92;section&#123;Chapter One&#125;
+        &#92;subsection&#123;Whoarewe&#125;
+        &#92;begin&#123;paragraph&#125;
+            &#92;textbf&#123;Marie Curie!&#125; &#92;newline
+            &#92;textit&#123;An association for students of Physics!&#125;
+        &#92;end&#123;paragraph&#125;
+        &#92;subsubsection&#123;Code!&#125;
+            &#92;begin&#123;code&#125;
+                    We love tabs in code!
+            &#92;end&#123;code&#125;       
+        &#92;ref&#123;NotDefinedLabel&#125;
+    &#92;end&#123;document&#125; 
+</pre>
+After rendering this results in: <br><h1>My Website</h1>
+        <h2>Chapter One</h2>
+        <h3>Whoarewe</h3>
+        <p>
+            <b>Marie Curie!</b> <br><i>An association for students of Physics!</i>
+        </p>
+        <h4>Code!</h4>
+            <pre>
+                    We love tabs in code!
+            </pre>       
+        ?
+
+		<h3>Module Figure</h3>
+			<p>
+    The figure module exposes commands that are designed to mimick the LaTeX package graphicx, with a few exceptions. 
+    Maybe the most notable exception is that most of these commands only work inside a figure environment, and will result in "command not found" errors if you use them elsewhere.
+</p>
+
+<h4>Implemented commands</h4>
+<ul>
+
+    <li><i>figure:</i> <b>&#92;includegraphics&#123;path/to/image&#125;</b><br><p>Use to display an image.</p></li>
+
+    <li><i>figure:</i> <b>&#92;caption&#123;caption text&#125;</b><br><p>Use to display text under your image.</p></li>
+
+    <li><i>figure:</i> <b>&#92;label&#123;label text&#125;</b><br><p>Use to give your image a label, 
+                                            so you can use <i>&#92;ref&#123;label&#125;</i> to reference it.</p></li>
+
+    <li><i>figure:</i> <b>&#92;width&#123;Width&#125;</b><br><p> Set the width of your image. 
+                    Width can have the following formats: 10px, 10&#37;, 10cm. </p></li>
+
+    <li><i>figure:</i> <b>&#92;height&#123;Height&#125;</b><br><p> Set the height of your image. 
+                    Height can have the following formats: 10px, 10&#37;, 10cm. </p></li>
+
+    <li><i>figure:</i> <b>&#92;alttext&#123;alt text&#125;</b><br><p>Set the alt text, also called hovertext, of your image.</p></li>
+
+</ul>
+
+<h4>Settings</h4>
+<p>
+    Reference labels are used to point to your image from the text. They put the following text in your caption: Figure N, where N is replaced with the number of your image. However, you might want to use a different text. For this you can access the global variable 'figureheader'. For example, you could do: &#92;define&#123;figureheader&#125;&#123;image&#125;. Now, the caption wil read: Image N. You should put the &#92;define above all figure environments.
+</p>
+
+<h4>Example</h4>
+<pre>
+    &#92;define&#123;figureheader&#125;&#123;image&#125;
+    &#92;begin&#123;figure&#125;
+        &#92;includegraphics&#123;test.png&#125;
+        &#92;caption&#123;This is a test image&#125;
+        &#92;label&#123;testimage&#125;
+        &#92;width&#123;120px&#125;
+        &#92;height&#123;30&#37;&#125;
+        &#92;alttext&#123;A mouse!&#125;
+    &#92;end&#123;figure&#125; 
+</pre>
+
+
+		<h3>Module Itemize</h3>
 			
-		&uring;bsection{Module Figure}
+		<h3>Module Tabular</h3>
 			
-		&uring;bsection{Module Itemize}
-			
-		&uring;bsection{Module Tabular}
-			
-	&ering;ction{MarTeX usage}
+	<h2>MarTeX usage</h2>
 		
-	&ering;ction{Module development}
+	<h2>Module development</h2>
 		
 
-\end{page}
+</body></html>

@@ -1,0 +1,36 @@
+\begin{paragraph}
+    The figure module exposes commands that are designed to mimick the LaTeX package graphicx, with a few exceptions. 
+    Maybe the most notable exception is that most of these commands only work inside a figure environment, and will result in "command not found" errors if you use them elsewhere.
+\end{paragraph}
+
+\subsubsection{Implemented commands}
+\begin{itemize}
+    \item{\descriptor{figure}{\command{includegraphics}{path/to/image}}{Use to display an image.}}
+    \item{\descriptor{figure}{\command{caption}{caption text}}{Use to display text under your image.}}
+    \item{\descriptor{figure}{\command{label}{label text}}{Use to give your image a label, 
+                                            so you can use \textit{\command{ref}{label}} to reference it.}}
+    \item{\descriptor{figure}{\command{width}{Width}}{ Set the width of your image. 
+                    Width can have the following formats: 10px, 10\%, 10cm. }}
+    \item{\descriptor{figure}{\command{height}{Height}}{ Set the height of your image. 
+                    Height can have the following formats: 10px, 10\%, 10cm. }}
+    \item{\descriptor{figure}{\command{alttext}{alt text}}{Set the alt text, also called hovertext, of your image.}}
+\end{itemize}
+
+\subsubsection{Settings}
+\begin{paragraph}
+    Reference labels are used to point to your image from the text. They put the following text in your caption: Figure N, where N is replaced with the number of your image. However, you might want to use a different text. For this you can access the global variable 'figureheader'. For example, you could do: \command{define}{figureheader}{image}. Now, the caption wil read: Image N. You should put the \command{define} above all figure environments.
+\end{paragraph}
+
+\subsubsection{Example}
+\begin{code}
+    \command{define}{figureheader}{image}
+    \command{begin}{figure}
+        \command{includegraphics}{test.png}
+        \command{caption}{This is a test image}
+        \command{label}{testimage}
+        \command{width}{120px}
+        \command{height}{30\%}
+        \command{alttext}{A mouse!}
+    \command{end}{figure} 
+\end{code}
+

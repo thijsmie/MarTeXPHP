@@ -13,14 +13,7 @@ interface IMarTeXmodule {
 abstract class MarTeXmodule {
     // Parent variable, so you can access the envvars
     public $MarTeX;
-    
-    public function docstring() {
-        if (!file_exists("doc/".get_class($this).".html")) {
-            return "Module ".get_class($this)."<br>\nNo documentation available.";
-        }
-        return "Module ".get_class($this)."<br>\n".file_get_content("doc/".get_class($this).".html");
-    }
-    
+
     public function valisaniArgument($argument, $number, $valisani) {
         if($number == 1 && is_array($argument)) {
             $this->MarTeX->parseError("(MarTeX) Warning: Too many arguments supplied to command.");
@@ -36,6 +29,41 @@ abstract class MarTeXmodule {
         }
         return $argument; 
     }
+    
+    public static function str_replace_all($from, $to, $subject)
+    {
+        $from = '/'.preg_quote($from, '/').'/';
+
+        return preg_replace($from, $to, $subject);
+    }
+    
+    public static function str_replace_first($from, $to, $subject)
+    {
+        $from = '/'.preg_quote($from, '/').'/';
+
+        return preg_replace($from, $to, $subject, 1);
+    }
+    
+    public function reset() {
+        return true;
+    }
+    
+    public function registerCommands() {
+        return array();
+    }
+    
+    public function handleCommand($command, $argument) {
+        return "";
+    }
+    
+    public function registerEnvironments() {
+        return array();
+    }
+    
+    public function handleEnvironment($env, $opt, $txt) {
+        return "";
+    }
+    
 }
 
 class ModuleTools {

@@ -1,7 +1,7 @@
 <?php
 namespace MarTeX;
 
-require_once "module.php";
+require_once (__DIR__."/module.php");
 
 class Figure extends MarTeXmodule implements IMarTeXmodule {
     public function reset() {

@@ -1,0 +1,64 @@
+\begin{paragraph}
+    The document module exposes the basic commands that are designed to mimick the LaTeX main environment.
+\end{paragraph}
+
+\subsubsection{Implemented commands}
+\begin{itemize}
+    \item{\descriptor{global}{\command{title}{Title}}{Make a big fancy title.}}
+    \item{\descriptor{global}{\command{section}{Title}}{Make a section title.}}
+    \item{\descriptor{global}{\command{subsection}{Title}}{Make a subsection title.}}
+    \item{\descriptor{global}{\command{subsubsection}{Title}}{Make a subsubsection title.}}
+    \item{\descriptor{global}{\command{textbf}{Text}}{Render Text in bold.}}
+    \item{\descriptor{global}{\command{textit}{Text}}{Render Text in italics.}}
+    \item{\descriptor{global}{\command{hline}}{Make a horizontal line.}}
+    \item{\descriptor{global}{\command{newline}}{Line break, equivalent to a double backslash.}}
+    \item{\descriptor{global}{\command{paragraph}{text}}{Render the text as a paragraph, normally not noticable, but might have implications if a stylesheet is loaded. Use for a single line of text without commands only, please use the environment \textit{paragraph} otherwise.}}
+    \item{\descriptor{global}{\command{ref}{label}}{Reference a label (from an image, for example). Works with both forward and backwards declaration (The label can be both above and below the ref command). Outputs a question mark when the label is undefined.}}
+    \item{\descriptor{global}{\command{define}{Variable}{Value}}{Set the global Variable to Value. Often used to change module behaviour.}}
+\end{itemize}
+
+\subsubsection{Implemented environments}
+\paragraph{In MarTeX an environment is defined as the area between a begin and matching end command:}
+\begin{code}
+    \command{begin}{Environment} 
+        Environment content
+    \command{end}{Environment}
+\end{code}
+\begin{itemize}
+    \item{\envdescriptor{document}{Does basically nothing right now, but might do in the future. For now it is there for the TeX code-style idea.}}
+    \item{\envdescriptor{paragraph}{Does the same as the command 'paragraph', but now with begin and end commands. Works better for multiline paragraphs.}}
+    \item{\envdescriptor{code}{Wrapper for the html 'pre' environment. Stuff in this environment is displayed with all whitespace intact (tabs, newlines, etc)}}
+\end{itemize}
+
+
+\subsubsection{Example}
+\begin{code}
+    \command{define}{marie}{cool}
+    \command{title}{My Website}
+    \command{begin}{document}
+        \command{section}{Chapter One}
+        \command{subsection}{Whoarewe}
+        \command{begin}{paragraph}
+            \command{textbf}{Marie Curie!} \command{newline}
+            \command{textit}{An association for students of Physics!}
+        \command{end}{paragraph}
+        \command{subsubsection}{Code!}
+            \command{begin}{code}
+                    We love tabs in code!
+            \command{end}{code}       
+        \command{ref}{NotDefinedLabel}
+    \command{end}{document} 
+\end{code}
+After rendering this results in: \\
+    \title{My Website}
+        \section{Chapter One}
+        \subsection{Whoarewe}
+        \begin{paragraph}
+            \textbf{Marie Curie!} \newline
+            \textit{An association for students of Physics!}
+        \end{paragraph}
+        \subsubsection{Code!}
+            \begin{code}
+                    We love tabs in code!
+            \end{code}       
+        \ref{NotDefinedLabel}

@@ -3,7 +3,7 @@ namespace MarTeX;
 
 class MarTeX {
     public function __construct() {
-        $char = fopen('char.txt','r');
+        $char = fopen(__DIR__.'/char.txt','r');
         $code = array();
         $replace = array();
         if ( $char === false) {
@@ -11,8 +11,9 @@ class MarTeX {
         }
         
         while (($line = fgets($char)) !== false) {
+            $line = rtrim($line);
             $kv = explode("\t", $line);
-            $code[] = '/'.preg_quote($kv[0]).'/';
+            $code[] = '/'.preg_quote($kv[0]).'/m';
             $replace[] = $kv[1];
         }
 
@@ -44,22 +45,28 @@ class MarTeX {
         return false;
     }
     
-    private function simpleReplacePass($text) {
+    public function simpleReplacePass($text) {
         return preg_replace($this->_simple_replace_array[0], $this->_simple_replace_array[1], $text);
+        
     }
     
     private function handleCommand($command, $argument) {
         if ($command == "begin") {
-            if (is_array($argument))
-                $argument = $argument[0];
-            $this->_EnvStack[] = $argument;
+            $test = $argument;
+            
+            if (is_array($argument)) {
+                $test = $argument[0];
+                $argument = implode('}{', $argument);
+            }
+               
+            $this->_EnvStack[] = $test;
+            
             return "\\begin{".$argument."}";
         }
         else if ($command == "end") {
             $toEnd = array_pop($this->_EnvStack);
             if ($argument != $toEnd) {
-                $this->_EnvStack[] = $toEnd;
-                $this->parseError("(MarTeX) Error: environment end ".$argument." has no matching begin declaration.");
+                $this->parseError("(MarTeX) Error: environment end ".$toEnd." has no matching begin declaration.");
             }
             return "\\end{".$argument."}";
         }
@@ -82,23 +89,32 @@ class MarTeX {
         }
     }
     
+    private function complexPreProcess($text) {
+        $regex = "/}\\s*{/im";
+        preg_match_all($regex, $text, $matches);
+        for($i = 0; $i < count($matches[0]); $i+=1) {
+            $text = str_replace_first($matches[0][$i], "|" , $text);
+        }
+        return $text;
+    }
+    
     private function complexReplacePass($text) {
         // El Monstro:
-        $regex = "/\\\\([\\w\\>]*)(?:(?:\\s*{\\s*([^{}]*)\\s*})|(?:\\s|\\\\|$))(?:((?:\\s*{(?:[^{}]*)})+)|)/im";
+        //$regex = "/\\\\([\\w\\>]*)(?:(?:\\s*{((?:[.\\n]*|(?:{[.\\n]}))*)})|(?:\\s|\\\\|$))(?:((?:\\s*{(?:[.\\n]*|(?:{[.\\n]}))*})+)|)/im";
         //        Match \command       Argument           make optional     Maybe more arguments    make optional
-	    preg_match_all($regex, $text, $matches);
+	    // Monstro has been replaced
 	    
+	    // Regex, split for readability:
+	    $reg_commandword = '\\\\((?:[a-z]|[A-Z])+)'; //Match backslash, then word and
+	    $reg_withargument = '(?:\s*\{([^\{\}\\\\]*)\})'; //Match pair of braces with no braces or backslash contained
+	    $reg_withoutargument = '(?:\s+(?!\s|{))'; //Match possible whitespace and make sure no brace follows
+	    $regex = "/$reg_commandword(?:$reg_withargument|$reg_withoutargument)/im";
+	    preg_match_all($regex, $text, $matches);
+        
 	    for($i = 0; $i < count($matches[0]); $i+=1) {
-	        if ($matches[3][$i] != "") {
-	            $step1 = str_replace_first("{","",$matches[3][$i]);
-	            $step2 = str_replace_all("}","",$step1);
-	            $step3 = explode("{", $step2);
-	            
-	            $arg = array_merge(array($matches[2][$i]),$step3);
-	        }
-	        else {
-	            $arg = $matches[2][$i];
-	        }
+	        $arg = explode("|", $matches[2][$i]);
+	        if (count($arg) == 1)
+	            $arg = $arg[0];
 		    $ntext = $this->handleCommand($matches[1][$i], $arg);
 		    if ($this->_newError) {
 		        $this->_Error .= "\n\tCaused by command:".$matches[0][$i];
@@ -154,16 +170,14 @@ class MarTeX {
             $this->_modObjs[$i]->reset();
         }
         
-        // Parse
-        do {
-            $oldtext = $text;
-            $text = $this->simpleReplacePass($oldtext);
-        }
-        while ($oldtext != $text);
+        // Parse  
         
+        $text = $this->simpleReplacePass($text);
+              
         do {
             $oldtext = $text;
-            $text = $this->complexReplacePass($oldtext);
+            $text = $this->complexPreProcess($text);
+            $text = $this->complexReplacePass($text);
         }
         while ($oldtext != $text);
         
@@ -220,14 +234,6 @@ class MarTeX {
     
     public function getResult() {
         return $this->_Result;
-    }
-    
-    public function documentation() {
-        $output = file_get_contents("doc/MarTeX.html");
-        for($i = 0; $i < count($this->_modObjs); $i++) {
-            $output .= $this->_modObjs[$i]->docstring();
-        }
-        return $output;
     }
     
     private $_simple_replace_array;

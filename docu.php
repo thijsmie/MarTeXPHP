@@ -29,19 +29,20 @@ class Docu extends MarTeXmodule {
             break;
             case "include":
                 //Why the .tex? We wouldn't want people including php script content now would we...
-                if (!file_exists($argument.".tex")) {
-                    $this->MarTeX->parseError("(MarTeX/Docu) Error: include file '".$argument."' does not exist.");
-                    return "";
-                }
+                
                 $path = $this->MarTeX->getGlobalVar("path");
                 if ($path === false) {
-                    $path = "";
+                    $path = ".";
+                }
+                if (!file_exists($path.'/'.$argument.".tex")) {
+                    $this->MarTeX->parseError("(MarTeX/Docu) Error: include file '".$argument."' does not exist.");
+                    return "";
                 }
                 return $this->MarTeX->simpleReplacePass(file_get_contents($path.'/'.$argument.".tex"));
             break;
             case "usepackage":
                 if (!file_exists(__DIR__.'/'.$argument.".php")) {
-                    $this->MarTeX->parseError("(MarTeX/Docu) Error: module '".$argument."' does not exist.");
+                    $this->MarTeX->parseError("(MarTeX/Docu) Error: module '".__DIR__.'/'.$argument.".php"."' does not exist.");
                     return "";
                 }
                 require_once (__DIR__.'/'.$argument.".php");

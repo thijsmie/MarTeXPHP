@@ -5,7 +5,7 @@ require_once (__DIR__."/module.php");
 
 class Document extends MarTeXmodule implements IMarTeXmodule {
     public function registerCommands() {
-        return array("section", "subsection", "subsubsection", "textbf", "textit", "hline", "ref", "ref>", "define", "newline", "paragraph", "title"); 
+        return array("section", "subsection", "subsubsection", "textbf", "textit", "hline", "ref", "refpass", "define", "newline", "paragraph", "title"); 
     }
     
     public function handleCommand($command, $argument) {
@@ -42,10 +42,10 @@ class Document extends MarTeXmodule implements IMarTeXmodule {
                     // This label is not defined, but may be defined below this call.
                     // Therefore, change the functioncall to something that is impossible to call as user
                     // So we can try again on the next iteration
-                    return "\\ref>{".$argument."}";
+                    return "\\refpass{".$argument."}";
                 }
                 return $reference;
-            case "ref>":
+            case "refpass":
                 $argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");    
                 $reference = $this->MarTeX->getGlobalVar("label:".$argument);
                 if ($reference === false) {

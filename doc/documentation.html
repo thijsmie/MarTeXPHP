@@ -1,10 +1,12 @@
+<!DOCTYPE html><html><head>
 
 
 
+<link href='prism.css' rel='stylesheet' type='text/css' />
 
 
-<html><body>
 
+</head><body>
 <h1>MarTeX</h1>
 	<hr><p>
 		MarTeX is a versitale TeX to HTML interpreter. 
@@ -42,15 +44,16 @@
 
     <li><i>global:</i> <b>&#92;define&#123;Variable&#125;&#123;Value&#125;</b><br><p>Set the global Variable to Value. Often used to change module behaviour.</p></li>
 
+    \item{<i>global:</i> <b>&#92;href&#123;URL&#125;&#123;Text&#125;</b><br><p>Make a hyperlink to URL with text Text</p>
 </ul>
 
 <h4>Implemented environments</h4>
 <p>In MarTeX an environment is defined as the area between a begin and matching end command:</p>
-<pre>
-    &#92;begin&#123;Environment&#125; 
-        Environment content
-    &#92;end&#123;Environment&#125;
-</pre>
+<pre><code class="language-latex">&#92;begin&#123;Environment&#125; 
+    Environment content
+&#92;end&#123;Environment&#125; 
+</code></pre>
+
 <ul>
 
     <li><i>document:</i> <br><p>Does basically nothing right now, but might do in the future. For now it is there for the TeX code-style idea.</p></li>
@@ -63,14 +66,13 @@
 
 
 <h4>Example</h4>
-<pre>
-    &#92;define&#123;marie&#125;&#123;cool&#125;
+<pre><code class="language-latex"> &#92;define&#123;marie&#125;&#123;cool&#125;
     &#92;title&#123;My Website&#125;
     &#92;begin&#123;document&#125;
         &#92;section&#123;Chapter One&#125;
         &#92;subsection&#123;Whoarewe&#125;
         &#92;begin&#123;paragraph&#125;
-            &#92;textbf&#123;Marie Curie!&#125; &#92;newline
+            &#92;textbf&#123;Marie Curie!&#125; &#92;&#92;
             &#92;textit&#123;An association for students of Physics!&#125;
         &#92;end&#123;paragraph&#125;
         &#92;subsubsection&#123;Code!&#125;
@@ -79,7 +81,8 @@
             &#92;end&#123;code&#125;       
         &#92;ref&#123;NotDefinedLabel&#125;
     &#92;end&#123;document&#125; 
-</pre>
+</code></pre>
+
 After rendering this results in: <br><h1>My Website</h1>
         <h2>Chapter One</h2>
         <h3>Whoarewe</h3>
@@ -124,8 +127,7 @@ After rendering this results in: <br><h1>My Website</h1>
 </p>
 
 <h4>Example</h4>
-<pre>
-    &#92;define&#123;figureheader&#125;&#123;image&#125;
+<pre><code class="language-latex">    &#92;define&#123;figureheader&#125;&#123;image&#125;
     &#92;begin&#123;figure&#125;
         &#92;includegraphics&#123;test.png&#125;
         &#92;caption&#123;This is a test image&#125;
@@ -134,16 +136,205 @@ After rendering this results in: <br><h1>My Website</h1>
         &#92;height&#123;30&#37;&#125;
         &#92;alttext&#123;A mouse!&#125;
     &#92;end&#123;figure&#125; 
-</pre>
+</code></pre>
 
 
 		<h3>Module Itemize</h3>
-			
+			<p>
+    The itemize module exposes commands to help make fancy lists.
+</p>
+
+<h4>Implemented commands</h4>
+<ul>
+
+    <li><i>itemize/enumerate:</i> <b>&#92;item&#123;Itemtext&#125;</b><br><p>Add an item to a list.</p></li>
+
+    <li><i>itemize/enumerate:</i> <b>&#92;setmarker&#123;type&#125;</b><br><p>Set the marker type. Valid types are: square, bullet, circle, none, numbers, letters, LETTERS, roman, ROMAN.</p></li>
+
+</ul>
+
+<h4>Implemented environments</h4>
+<p>
+The itemize module implements two environments. They are equivalent, but have a different default marker type.
+</p>
+<ul>
+
+    <li><i>itemize:</i> <br><p>A list with default marker 'bullet'</p></li>
+
+    <li><i>paragraph:</i> <br><p>A list with default marker 'numbers'</p></li>
+
+</ul>
+
+
+<h4>Example</h4>
+<pre><code class="language-latex"> &#92;begin&#123;itemize&#125;
+    &#92;item&#123;Akcie&#125;
+    &#92;item&#123;Ambicie&#125;
+    &#92;item&#123;Batavieren&#125;
+    &#92;item&#123;Boson&#125;
+&#92;end&#123;itemize&#125;
+&#92;begin&#123;itemize&#125;
+    &#92;setmarker&#123;square&#125;
+    &#92;item&#123;Brouwcommissie&#125;
+    &#92;item&#123;Colloquiumcommissie&#125;
+    &#92;item&#123;Excurcie&#125;
+&#92;end&#123;itemize&#125;
+&#92;begin&#123;enumerate&#125;
+    &#92;item&#123;Impuls&#125;
+    &#92;item&#123;Lustrumcie&#125;
+    &#92;item&#123;M&#92;"unchencie&#125;
+&#92;end&#123;enumerate&#125;
+&#92;begin&#123;enumerate&#125;
+    &#92;setmarker&#123;letters&#125;
+    &#92;item&#123;Ouderdagcie&#125;
+    &#92;item&#123;Particie&#125;
+    &#92;item&#123;PR-cie&#125;
+    &#92;item&#123;Reunistencie&#125;
+&#92;end&#123;enumerate&#125;
+&#92;begin&#123;enumerate&#125;
+    &#92;setmarker&#123;ROMAN&#125;
+    &#92;item&#123;Sponsorcommissie&#125;
+    &#92;item&#123;Symposiumcie&#125;
+    &#92;item&#123;Vakancie&#125;
+    &#92;item&#123;Weekendcommissie&#125;
+    &#92;item&#123;WWW-cie&#125;
+    &#92;item&#123;Co&#92;"ordinatiecommissie&#125;
+&#92;end&#123;enumerate&#125; 
+</code></pre>
+
+After rendering this results in: <br><ul>
+
+    <li>Akcie</li>
+
+    <li>Ambicie</li>
+
+    <li>Batavieren</li>
+
+    <li>Boson</li>
+
+</ul>
+<ul style='list-style-type:square'>
+
+    
+    <li>Brouwcommissie</li>
+
+    <li>Colloquiumcommissie</li>
+
+    <li>Excurcie</li>
+
+</ul>
+<ol>
+
+    <li>Impuls</li>
+
+    <li>Lustrumcie</li>
+
+    <li>M&uuml;nchencie</li>
+
+</ol>
+<ol type='a'>
+
+    
+    <li>Ouderdagcie</li>
+
+    <li>Particie</li>
+
+    <li>PR-cie</li>
+
+    <li>Reunistencie</li>
+
+</ol>
+<ol type='I'>
+
+    
+    <li>Sponsorcommissie</li>
+
+    <li>Symposiumcie</li>
+
+    <li>Vakancie</li>
+
+    <li>Weekendcommissie</li>
+
+    <li>WWW-cie</li>
+
+    <li>Co&ouml;rdinatiecommissie</li>
+
+</ol>
+
 		<h3>Module Tabular</h3>
-			
+			<p>
+    Tabulars in LaTeX are not the most well defined things. This implementation is basic and subject to change. Planned features include multi-rows and columns.
+</p>
+
+<h4>Implemented commands</h4>
+<ul>
+
+    <li><i>tabular:</i> <b>&#92;hline</b><br><p>Add a horizontal line at this position in the table. Maximum of two lines per row.</p></li>
+
+    <li><i>tabular:</i> <b>&#92;linewidth</b><br><p>Set the border width of your table cells.</p></li>
+
+</ul>
+
+<h4>Implemented Environments</h4>
+The only environment implemented by this module is the <i>tabular</i> environment. It works just like the tabular in LaTeX:<br><pre><code class="language-latex">&#92;begin&#123;tabular&#125;&#123; l | c || r | &#125;
+    &#92;hline
+    1 & 2 & 3 &#92;&#92; &#92;hline
+    4 & 5 & 6 &#92;&#92; &#92;hline
+    7 & 8 & 9 &#92;&#92;
+    &#92;hline
+&#92;end&#123;tabular&#125;
+</code></pre>
+This results in:
+<table cellpadding='4'; style='margin:6px;border-collapse:collapse;border-style:solid;border-width:0px;'>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-top: 1px solid black;text-align: left;'>      1 </td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-left: 1px solid black;text-align: center;'> 2 </td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-right: 1px solid black;border-left: 3px double black;text-align: right;'> 3  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-top: 1px solid black;text-align: left;'>   4 </td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-left: 1px solid black;text-align: center;'> 5 </td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-right: 1px solid black;border-left: 3px double black;text-align: right;'> 6  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-bottom: 1px solid black;text-align: left;'>   7 </td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black;text-align: center;'> 8 </td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-bottom: 1px solid black;border-right: 1px solid black;border-left: 3px double black;text-align: right;'> 9  </td>	</tr>
+	<tr>
+		</table>
+
 	<h2>MarTeX usage</h2>
-		
+		<p>
+Using MarTeX for your website shenanigans is pretty easy. You start by requiring martex.php and construction a MarTeX instance. All MarTeX classes and functions are contained in the MarTeX namespace, so there won't be any collissions with any functions and classes you use yourself.
+
+<pre><code class="language-php">require_once (__DIR__.'/relative/path/to/martex.php');
+    
+&#36;Tex = new MarTeX&#92;MarTeX();
+</code></pre>
+
+Then, you require the modules you like and register them to the MarTeX instance.
+
+<pre><code class="language-php">require_once (__DIR__.'/relative/path/to/document.php');
+
+&#36;Document = new MarTeX&#92;Document();
+&#36;Tex-&gt;registerModule(&#36;Document);
+</code></pre>
+
+Now you are all set up for TeX'in. Use the parse function with some text. This could be a file, or POST data. If you use POST data, 
+make sure it is urldecoded and magic quotes are turned off in your php configuration. Otherwise your backslashes in your text could end up being escaped, 
+and MarTeX will interpret them as a double backslash, resulting in a plain old newline.
+
+<pre><code class="language-php">&#36;Tex-&gt;parse(&#36;my_tex_text);
+</code></pre>
+
+We're almost finished. The last thing to do is to check for errors and maybe return them, and returning the output.
+
+<pre><code class="language-php">if (&#36;Tex-&gt;hasError()) {
+    echo &#36;Tex-&gt;getError();
+}
+echo &#36;Tex-&gt;getResult();
+</code></pre>
+
+Please note that, even though we might have errors, the result is still returned. In most cases this works, 
+since MarTeX will usually just discard commands that cause errors, or make an attempt to fix it. Only on
+serious syntax errors MarTeX will not return any output.
+</p>
+
 	<h2>Module development</h2>
 		
+    <script src='prism.js' type='text/javascript'></script>
+</body>
 
-</body></html>
+</html>

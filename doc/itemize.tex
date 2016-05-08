@@ -1,0 +1,93 @@
+\begin{paragraph}
+    The itemize module exposes commands to help make fancy lists.
+\end{paragraph}
+
+\subsubsection{Implemented commands}
+\begin{itemize}
+    \item{\descriptor{itemize/enumerate}{\command{item}{Itemtext}}{Add an item to a list.}}
+    \item{\descriptor{itemize/enumerate}{\command{setmarker}{type}}{Set the marker type. Valid types are: square, bullet, circle, none, numbers, letters, LETTERS, roman, ROMAN.}}
+\end{itemize}
+
+\subsubsection{Implemented environments}
+\begin{paragraph}
+The itemize module implements two environments. They are equivalent, but have a different default marker type.
+\end{paragraph}
+\begin{itemize}
+    \item{\envdescriptor{itemize}{A list with default marker 'bullet'}}
+    \item{\envdescriptor{paragraph}{A list with default marker 'numbers'}}
+\end{itemize}
+
+
+\subsubsection{Example}
+\begin{code}{latex} 
+\begin{verbatim}
+\begin{itemize}
+    \item{Akcie}
+    \item{Ambicie}
+    \item{Batavieren}
+    \item{Boson}
+\end{itemize}
+\begin{itemize}
+    \setmarker{square}
+    \item{Brouwcommissie}
+    \item{Colloquiumcommissie}
+    \item{Excurcie}
+\end{itemize}
+\begin{enumerate}
+    \item{Impuls}
+    \item{Lustrumcie}
+    \item{M\"unchencie}
+\end{enumerate}
+\begin{enumerate}
+    \setmarker{letters}
+    \item{Ouderdagcie}
+    \item{Particie}
+    \item{PR-cie}
+    \item{Reunistencie}
+\end{enumerate}
+\begin{enumerate}
+    \setmarker{ROMAN}
+    \item{Sponsorcommissie}
+    \item{Symposiumcie}
+    \item{Vakancie}
+    \item{Weekendcommissie}
+    \item{WWW-cie}
+    \item{Co\"ordinatiecommissie}
+\end{enumerate}
+\end{verbatim} 
+\end{code}
+
+After rendering this results in: \\
+\begin{itemize}
+    \item{Akcie}
+    \item{Ambicie}
+    \item{Batavieren}
+    \item{Boson}
+\end{itemize}
+\begin{itemize}
+    \setmarker{square}
+    \item{Brouwcommissie}
+    \item{Colloquiumcommissie}
+    \item{Excurcie}
+\end{itemize}
+\begin{enumerate}
+    \item{Impuls}
+    \item{Lustrumcie}
+    \item{M\"unchencie}
+\end{enumerate}
+\begin{enumerate}
+    \setmarker{letters}
+    \item{Ouderdagcie}
+    \item{Particie}
+    \item{PR-cie}
+    \item{Reunistencie}
+\end{enumerate}
+\begin{enumerate}
+    \setmarker{ROMAN}
+    \item{Sponsorcommissie}
+    \item{Symposiumcie}
+    \item{Vakancie}
+    \item{Weekendcommissie}
+    \item{WWW-cie}
+    \item{Co\"ordinatiecommissie}
+\end{enumerate}

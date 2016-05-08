@@ -3,7 +3,7 @@ namespace MarTeX;
 
 require_once (__DIR__."/module.php");
 
-class Document extends MarTeXmodule implements IMarTeXmodule {
+class Document extends MarTeXmodule {
     public function registerCommands() {
         return array("section", "subsection", "subsubsection", "textbf", "textit", "hline", "ref", "refpass", "define", "newline", "paragraph", "title"); 
     }
@@ -51,7 +51,7 @@ class Document extends MarTeXmodule implements IMarTeXmodule {
                 if ($reference === false) {
                     // This label is not defined on second pass, throw warning.
                     // Note, this means backward declaration of dynamic labels is not allowed, but forwards is!
-                    $this->MarTeX->parseError("(MarTeX/document) Error: reference label '".$argument."' was not declared.");
+                    $this->MarTeX->parseError("(MarTeX/Document) Error: reference label '".$argument."' was not declared.");
                     return "?";
                 }
                 return $reference;
@@ -75,6 +75,9 @@ class Document extends MarTeXmodule implements IMarTeXmodule {
             case "paragraph":
                 return "<p>".$text."</p>";
             case "code":
+                if (is_array($options)) {
+                    return '<pre><code class="language-'.$options[1].'">'.$this->str_replace_first("\n","",$text)."</code></pre>";
+                }
                 return "<pre>".$text."</pre>";
         }
     }

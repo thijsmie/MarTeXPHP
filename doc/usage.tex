@@ -1,0 +1,39 @@
+\begin{paragraph}
+Using MarTeX for your website shenanigans is pretty easy. You start by requiring martex.php and construction a MarTeX instance. All MarTeX classes and functions are contained in the MarTeX namespace, so there won't be any collissions with any functions and classes you use yourself.
+
+\begin{code}{php}
+require_once (__DIR__.'/relative/path/to/martex.php');
+    
+\$Tex = new MarTeX\backslashMarTeX();
+\end{code}
+
+Then, you require the modules you like and register them to the MarTeX instance.
+
+\begin{code}{php}
+require_once (__DIR__.'/relative/path/to/document.php');
+
+\$Document = new MarTeX\backslashDocument();
+\$Tex-\>registerModule(\$Document);
+\end{code}
+
+Now you are all set up for TeX'in. Use the parse function with some text. This could be a file, or POST data. If you use POST data, 
+make sure it is urldecoded and magic quotes are turned off in your php configuration. Otherwise your backslashes in your text could end up being escaped, 
+and MarTeX will interpret them as a double backslash, resulting in a plain old newline.
+
+\begin{code}{php}
+\$Tex-\>parse(\$my_tex_text);
+\end{code}
+
+We're almost finished. The last thing to do is to check for errors and maybe return them, and returning the output.
+
+\begin{code}{php}
+if (\$Tex-\>hasError()) {
+    echo \$Tex-\>getError();
+}
+echo \$Tex-\>getResult();
+\end{code}
+
+Please note that, even though we might have errors, the result is still returned. In most cases this works, 
+since MarTeX will usually just discard commands that cause errors, or make an attempt to fix it. Only on
+serious syntax errors MarTeX will not return any output.
+\end{paragraph}

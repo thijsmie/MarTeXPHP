@@ -3,13 +3,10 @@ namespace MarTeX;
 
 require_once (__DIR__."/module.php");
 
-class Itemize extends MarTeXmodule implements IMarTeXmodule {
-    public function reset() {
-        return true;
-    }
+class Itemize extends MarTeXmodule{
     
     public function registerCommands() {
-        return array("itemize/item", "enumerate/item", "itemize/setmarker", "enumarate/setmarker");
+        return array("itemize/item", "enumerate/item", "itemize/setmarker", "enumerate/setmarker");
     }
     
     public function registerEnvironments() {
@@ -51,7 +48,7 @@ class Itemize extends MarTeXmodule implements IMarTeXmodule {
                     return "<ul style='list-style-type:circle'>\n".$text."</ul>";
                 case "none":
                     return "<ul style='list-style-type:none'>\n".$text."</ul>";
-                case "number":
+                case "numbers":
                     return "<ol type='1'>\n".$text."</ol>";
                 case "letters":
                     return "<ol type='a'>\n".$text."</ol>";

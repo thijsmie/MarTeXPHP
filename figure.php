@@ -3,7 +3,7 @@ namespace MarTeX;
 
 require_once (__DIR__."/module.php");
 
-class Figure extends MarTeXmodule implements IMarTeXmodule {
+class Figure extends MarTeXmodule {
     public function reset() {
         $this->_labelNumber = 0;
     }

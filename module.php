@@ -64,19 +64,32 @@ abstract class MarTeXmodule {
         return "";
     }
     
+    public function registerSpecialEnvironments() {
+        return array();
+    }
+    
+    public function handleSpecialEnvironment($env, $txt) {
+        return "";
+    }
 }
 
 class ModuleTools {
+    // Using some weird ascii symbols to represent datafields.
+    // The Syntaxvalidity check in the main class should make
+    // Sure they are never used by the user
+    private static $_Sep = "¬";
+    private static $_Mid = "ƒ";
+    
     public static function setVar($var, $value) {
-        return "$".$var."%".$value."$";
+        return self::$_Sep.$var.self::$_Mid.$value.self::$_Sep;
     }
     
     public static function getVars($text) {
         $vars = array();
-        $ts = explode("$",$text);
+        $ts = explode(self::$_Sep,$text);
         
         for($i = 0; $i < count($ts); $i+=1) {
-            $kv = explode("%", $ts[$i]);
+            $kv = explode(self::$_Mid, $ts[$i]);
             if (count($kv) == 2) {
                 $vars[$kv[0]] = $kv[1];
             }
@@ -86,9 +99,9 @@ class ModuleTools {
     
     public static function getText($text) {
         $txt = "";
-        $ts = explode("$", $text);
+        $ts = explode(self::$_Sep, $text);
         for($i = 0; $i < count($ts); $i+=1) {
-            $kv = explode("%", $ts[$i]);
+            $kv = explode(self::$_Mid, $ts[$i]);
             if ($kv[0] == $ts[$i]) {
                 $txt .= $kv[0];
             }

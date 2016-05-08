@@ -3,7 +3,7 @@ namespace MarTeX;
 
 require_once (__DIR__."/module.php");
 
-class Tabular extends MarTeXmodule implements IMarTeXmodule {
+class Tabular extends MarTeXmodule{
     public function reset() {
         return true;
     }

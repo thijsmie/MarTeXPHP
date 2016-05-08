@@ -29,3 +29,4 @@ class Verbatim extends MarTeXmodule {
         return trim(preg_replace($replace, $to, $text));
     }
 }
+?>

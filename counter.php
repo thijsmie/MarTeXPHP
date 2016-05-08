@@ -3,7 +3,7 @@ namespace MarTeX;
 
 require_once (__DIR__."/module.php");
 
-class Counter extends MarTeXmodule implements IMarTeXmodule {
+class Counter extends MarTeXmodule {
     public function registerCommands() {
         return array("newcounter", "addtocounter", "setcounter", "stepcounter", "arabic", "value");
     }
@@ -37,17 +37,5 @@ class Counter extends MarTeXmodule implements IMarTeXmodule {
                 return strval($this->MarTeX->getGlobalVar("counter_".$argument));
         }
     }
-    
-    public function registerEnvironments() {
-        return array();
-    }
-    
-    public function handleEnvironment($env, $options, $text) {
-        return $text;
-    }
-    
-    public function reset() {
-        // Depends on global variabels, not internal, so the main module has removed all counters already.
-        return true;
-    }
 }
+?>

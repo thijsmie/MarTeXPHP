@@ -254,3 +254,5 @@ class Tabular extends MarTeXmodule{
         return $colspec;        
     }    
 }
+
+?>

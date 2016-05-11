@@ -1,0 +1,58 @@
+\begin{paragraph}
+  MarTeX modules are easy to develop. An empty module looks like this: 
+\end{paragraph}
+
+\begin{code}{php}
+\<?php
+// Add this module to the MarTeX namespace
+namespace MarTeX;
+
+// Include the base class and module tools
+include __DIR__.'/module.php';
+
+// Define the class and extend the MarTeXmodule
+class Helloworld extends MarTeXmodule \{
+
+\}
+
+?\>   
+\end{code}
+That's all there is to it! You now have a module that does nothing...\\
+Some remarks before we get to adding functionality to the module:
+\begin{itemize}
+ \item{The filename of the module should be all lowercase.}
+ \item{The classname of the module should be the filename with the first letter capitalized.}
+ \item{The class must be defined in the MarTeX namespace.}
+\end{itemize}
+That means we should save the example above as 'helloworld.php'.\\
+Now for adding functionality. There are three types of ways your module can add functionality: commands, environments and previronments. 
+\subsubsection{commands}
+Commands are the most basic feature you can add to your module. In order to add them, you need to implement two methods in your class: \textit{registerCommands} and \textit{handleCommand}.
+\textit{registerCommands} should return the commands you want to process as an array of strings.
+\begin{code}{php}
+public function registerCommands() {
+  return array("helloworld");
+}
+\end{code}
+In the code example we have registered the command 'helloworld'. We now need to handle that command by implementing the 'handleCommand' function:
+\begin{code}{php}
+public function handleCommand(\$command, \$argument) {
+  return "\<h1\>Hello, World!\</h1\>";
+}
+\end{code}
+Now, when the user types \backslashhelloworld in their source, it will compile to \<h1\>Hello, World!\</h1\>! But, if the user types \backslashhelloworld\{InvalidArgument\}, it will also
+compile to the same thing! It will just ignore the argument, but we might want to give the user a warning about that. For that, we make a call to the MarTeX object, which we can
+access because we extended the MarTeXmodule class:
+\begin{code}{php}
+public function handleCommand(\$command, \$argument) {
+  if (is_array(\$argument) or \$argument != "")) {
+    \$this-\>MarTeX-\>parseError("(MarTeX/Helloworld) Warning: more arguments supplied to helloworld then required.");
+  }
+  return "\<h1\>Hello, World!\</h1\>";
+}
+\end{code}
+You might notice that we first check if the argument is an array. That is because argument is an array if more then one argument is supplied, and a string when it is only a single argument.
+
+
+
+

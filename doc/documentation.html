@@ -333,7 +333,63 @@ serious syntax errors MarTeX will not return any output.
 </p>
 
 	<h2>Module development</h2>
-		
+		<p>
+  MarTeX modules are easy to develop. An empty module looks like this: 
+</p>
+
+<pre><code class="language-php">&lt;?php
+// Add this module to the MarTeX namespace
+namespace MarTeX;
+
+// Include the base class and module tools
+include __DIR__.'/module.php';
+
+// Define the class and extend the MarTeXmodule
+class Helloworld extends MarTeXmodule &#123;
+
+&#125;
+
+?&gt;   
+</code></pre>
+That's all there is to it! You now have a module that does nothing...<br>Some remarks before we get to adding functionality to the module:
+<ul>
+
+ <li>The filename of the module should be all lowercase.</li>
+
+ <li>The classname of the module should be the filename with the first letter capitalized.</li>
+
+ <li>The class must be defined in the MarTeX namespace.</li>
+
+</ul>
+That means we should save the example above as 'helloworld.php'.<br>Now for adding functionality. There are three types of ways your module can add functionality: commands, environments and previronments. 
+<h4>commands</h4>
+Commands are the most basic feature you can add to your module. In order to add them, you need to implement two methods in your class: <i>registerCommands</i> and <i>handleCommand</i>.
+<i>registerCommands</i> should return the commands you want to process as an array of strings.
+<pre><code class="language-php">public function registerCommands() {
+  return array("helloworld");
+}
+</code></pre>
+In the code example we have registered the command 'helloworld'. We now need to handle that command by implementing the 'handleCommand' function:
+<pre><code class="language-php">public function handleCommand(&#36;command, &#36;argument) {
+  return "&lt;h1&gt;Hello, World!&lt;/h1&gt;";
+}
+</code></pre>
+Now, when the user types &#92;helloworld in their source, it will compile to &lt;h1&gt;Hello, World!&lt;/h1&gt;! But, if the user types &#92;helloworld&#123;InvalidArgument&#125;, it will also
+compile to the same thing! It will just ignore the argument, but we might want to give the user a warning about that. For that, we make a call to the MarTeX object, which we can
+access because we extended the MarTeXmodule class:
+<pre><code class="language-php">public function handleCommand(&#36;command, &#36;argument) {
+  if (is_array(&#36;argument) or &#36;argument != "")) {
+    &#36;this-&gt;MarTeX-&gt;parseError("(MarTeX/Helloworld) Warning: more arguments supplied to helloworld then required.");
+  }
+  return "&lt;h1&gt;Hello, World!&lt;/h1&gt;";
+}
+</code></pre>
+You might notice that we first check if the argument is an array. That is because argument is an array if more then one argument is supplied, and a string when it is only a single argument.
+
+
+
+
+
     <script src='prism.js' type='text/javascript'></script>
 </body>
 

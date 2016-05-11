@@ -24,10 +24,13 @@ class Soa extends MarTeXmodule {
                 
                 $path = $this->MarTeX->getGlobalVar("path");
                 if ($path === false) {
-                    $path = ".";
+                    $path = __DIR__;
+                }
+                else {
+                    $path = __DIR__."/".$path;
                 }
                 if (!file_exists($path.'/'.$argument.".tex")) {
-                    $this->MarTeX->parseError("(MarTeX/Soa) Error: include file '".$argument."' does not exist.");
+                    $this->MarTeX->parseError("(MarTeX/Soa) Error: include file '".$path.'/'.$argument.".tex"."' does not exist.");
                     return "";
                 }
                 

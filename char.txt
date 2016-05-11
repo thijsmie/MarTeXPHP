@@ -5,6 +5,8 @@
 \copy	&copy;
 \>	&gt;
 \<	&lt;
+\}	&#125;
+\{	&#123;
 \mu	&micro;
 \cdot	&middot;
 \pm	&plusmn;

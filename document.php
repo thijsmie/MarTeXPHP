@@ -5,7 +5,7 @@ require_once (__DIR__."/module.php");
 
 class Document extends MarTeXmodule {
     public function registerCommands() {
-        return array("section", "subsection", "subsubsection", "textbf", "textit", "hline", "ref", "refpass", "define", "newline", "paragraph", "title"); 
+        return array("section", "subsection", "subsubsection", "textbf", "textit", "underline", "hline", "ref", "refpass", "define", "newline", "paragraph", "title", "href"); 
     }
     
     public function handleCommand($command, $argument) {
@@ -21,16 +21,19 @@ class Document extends MarTeXmodule {
                 $argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");
                 return "<h4>".$argument."</h4>";
             case "textbf":
-                $argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");
+                $argument = $this->valisaniArgument($argument, 1, "String");
                 return "<b>".$argument."</b>";
             case "textit":
-                $argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");
+                $argument = $this->valisaniArgument($argument, 1, "String");
                 return "<i>".$argument."</i>";
+            case "underline":
+                $argument = $this->valisaniArgument($argument, 1, "String");
+                return "<u>".$argument."</u>";
             case "paragraph":
-                $argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");
+                $argument = $this->valisaniArgument($argument, 1, "String");
                 return "<p>".$argument."</p>";
             case "title":
-                $argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");
+                $argument = $this->valisaniArgument($argument, 1, "String");
                 return "<h1>".$argument."</h1>";
             case "hline":
                 $argument = $this->valisaniArgument($argument, 0, "");
@@ -60,12 +63,15 @@ class Document extends MarTeXmodule {
                 $this->MarTeX->setGlobalVar($argument[0], $argument[1]);
                 return "";
             case "newline": 
-                return "<br>";               
+                return "<br>"; 
+            case "href":
+                $argument = $this->valisaniArgument($argument, 2, array("String", "String"));
+                return "<a href='".$argument[0]."'>".$argument[1]."</a>";              
         }
     }
     
     public function registerEnvironments() {
-        return array("document", "paragraph","code");
+        return array("document", "paragraph", "code");
     }
     
     public function handleEnvironment($env, $options, $text) {

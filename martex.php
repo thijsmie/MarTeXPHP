@@ -326,6 +326,13 @@ class MarTeX {
             $this->_modObjs[$i]->reset();
         }
         
+        return $this->doParse($text);
+    }
+    
+    public function doParse($text) {
+        // Check for recursive include count
+        $checkenv = count($this->_EnvStack);
+        
         // Parse the special environments
         $text = $this->specialEnvReplacePass($text);
         
@@ -357,7 +364,7 @@ class MarTeX {
         $this->_Result = $text;
         
         // Detect unclosed environments.
-        if(count($this->_EnvStack)> 0) {
+        if(count($this->_EnvStack) > $checkenv) {
             $this->parseError("(MarTeX) Error: unclosed environment(s) detected: " . 
                                                     implode(', ', $this->_EnvStack). 
                                                         ".");

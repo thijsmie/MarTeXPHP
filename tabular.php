@@ -73,7 +73,7 @@ class Tabular extends MarTeXmodule{
             
             if ($i == count($lines) - 2) {
                 // Maybe this is the last line with real content, maybe we need to add extra lines...
-                if (count(explode('&', $lines[$i+1])) == 1) {
+                if (count(explode(' & ', $lines[$i+1])) == 1) {
                     //Yup, lets see if we need any bottom borderlines
                     $hlinenum = -1;
                     $nline = $lines[$i+1];
@@ -99,7 +99,7 @@ class Tabular extends MarTeXmodule{
             }
             
             $output.= "\t<tr>\n\t\t";
-            $cells = explode('&',$line);
+            $cells = explode(' & ',$line);
             if (count($cells) == 1) {
                 continue;
             }

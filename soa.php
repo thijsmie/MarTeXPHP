@@ -5,6 +5,15 @@ require_once (__DIR__."/module.php");
 
 class Soa extends MarTeXmodule {
     // NOTE: This module is unsafe! Only run trusted texfiles or on a separate server and copy the generated content afterwards!!
+    
+    private $_IncludeCount;
+    private $_IncludeArray;
+    
+    public function reset() {
+        $this->_IncludeCount = 0;
+        $this->_IncludeArray = "";
+    }
+    
     public function registerCommands() {
         return array("descriptor", "envdescriptor", "include", "usepackage", "page/link", "document/link", "page/script");
     }
@@ -34,14 +43,10 @@ class Soa extends MarTeXmodule {
                     return "";
                 }
                 
-                $text = $this->MarTeX->specialEnvReplacePass(file_get_contents($path.'/'.$argument.".tex"));
-                // Check syntax
-                if (!$this->MarTeX->syntaxValidity($text)) {
-                    $this->MarTeX->parseError("(MarTeX/Soa) Error: include file '".$argument."' has invalid syntax.");
-                    return "";
-                }          
-                
-                return $this->MarTeX->simpleReplacePass($text);
+                $text = $this->MarTeX->doParse(file_get_contents($path.'/'.$argument.".tex"));
+                $this->_IncludeArray[] = $this->MarTeX->getResult();
+                $this->_IncludeCount++;
+                return "\\begin{includer}".strval($this->_IncludeCount-1)."\\end{includer}";
             break;
             case "usepackage":
                 if (!file_exists(__DIR__.'/'.$argument.".php")) {
@@ -66,7 +71,7 @@ class Soa extends MarTeXmodule {
     }
     
     public function registerEnvironments() {
-        return array("page", "document");
+        return array("page", "document", "includer");
     }
     
     public function handleEnvironment($env, $option, $text) {
@@ -75,6 +80,8 @@ class Soa extends MarTeXmodule {
                 return "<!DOCTYPE html><html><head>".$text."</html>";
             case "document":
                 return "</head><body>".$text."</body>";
+            case "includer":
+                return $this->_IncludeArray[intval($text)];
         }
     }
 }

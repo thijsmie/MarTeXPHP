@@ -384,9 +384,13 @@ access because we extended the MarTeXmodule class:
   return "&lt;h1&gt;Hello, World!&lt;/h1&gt;";
 }
 </code></pre>
-You might notice that we first check if the argument is an array. That is because argument is an array if more then one argument is supplied, and a string when it is only a single argument.
-
-
+You might notice that we first check if the argument is an array. That is because argument is an array if more then one argument is supplied, and a string when it is only a single argument. <br>Now, this input validation might get a bit tedious when you have multiple arguments and commands. Therefore, there is helper function for this:
+<pre><code class="language-php">public function handleCommand(&#36;command, &#36;argument) {
+  &#36;argument = &#36;this-&gt;valisaniArgument(&#36;argument, 0, "");
+  return "&lt;h1&gt;Hello, World!&lt;/h1&gt;";
+}
+</code></pre>
+The valisani function takes three arguments. The first argument is input, the second number is the supposed number of arguments and the third is for defining the arguments types.
 
 
 

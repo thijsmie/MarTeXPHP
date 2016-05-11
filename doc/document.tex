@@ -8,8 +8,9 @@
     \item{\descriptor{global}{\command{section}{Title}}{Make a section title.}}
     \item{\descriptor{global}{\command{subsection}{Title}}{Make a subsection title.}}
     \item{\descriptor{global}{\command{subsubsection}{Title}}{Make a subsubsection title.}}
-    \item{\descriptor{global}{\command{textbf}{Text}}{Render Text in bold.}}
-    \item{\descriptor{global}{\command{textit}{Text}}{Render Text in italics.}}
+    \item{\descriptor{global}{\command{textbf}{Text}}{Render Text in \textbf{bold}.}}
+    \item{\descriptor{global}{\command{textit}{Text}}{Render Text in \textit{italics}.}}
+    \item{\descriptor{global}{\command{underline}{Text}}{Render Text \underline{underlined}.}}
     \item{\descriptor{global}{\command{hline}}{Make a horizontal line.}}
     \item{\descriptor{global}{\command{newline}}{Line break, equivalent to a double backslash.}}
     \item{\descriptor{global}{\command{paragraph}{text}}{Render the text as a paragraph, normally not noticable, but might have implications if a stylesheet is loaded. Use for a single line of text without commands only, please use the environment \textit{paragraph} otherwise.}}
@@ -17,6 +18,44 @@
     \item{\descriptor{global}{\command{define}{Variable}{Value}}{Set the global Variable to Value. Often used to change module behaviour.}}
     \item{\descriptor{global}{\command{href}{URL}{Text}}{Make a hyperlink to URL with text Text}
 \end{itemize}
+
+\subsubsection{Special characters}
+MarTeX has some special characters you need to escape to render:
+\begin{tabular}{|l | l |}
+\hline
+\textbf{Command}  &  \textbf{Result} \\
+\hline \hline
+\command{,}	     & Small non-breaking space} \\
+\command{\&}     & \& \\
+\command{\%}	 & \% \\
+\command{\$}   	 & \$ \\
+\command{copy}	 & \copy \\
+\command{\>}	 & \> \\
+\command{\<}	 & \< \\
+\command{\}}	 & \} \\
+\command{\{}	 & \{ \\
+\command{cdot}	 & \cdot \\
+\command{pm}	 & \pm \\
+\command{euro}	 & \euro \\
+\command{pound}	 & \pound \\
+\command{tm}	 & \tm \\
+\command{deg}	 & \deg \\
+\command{"}AaEeIiOoUuy & \"A\"a\"E\"e\"I\"i\"O\"o\"U\"u\"y \\
+\command{'}AaEeIiOoUuZ & \'A\'a\'E\'e\'I\'i\'O\'o\'U\'u\'Z \\
+\command{`}AaEeIiOoUu & \`A\`a\`E\`e\`I\`i\`O\`o\`U\`u \\
+\command{^}AaEeIiOoUu & \^A\^a\^E\^e\^I\^i\^O\^o\^U\^u \\
+\command{~}AaIiOoNnUu & \~A\~a\~I\~i\~O\~o\~N\~n\~U\~u \\
+\command{.}AaUu & \.A\.a\.U\.u \\
+\command{-O}\command{-o} & \-O\-o \\
+\command{ss} & \ss \\
+\command{Alpha}\command{alpha} & \Alpha\alpha \\
+\command{Beta}\command{beta} & \Beta\beta \\
+... & ... \\
+\command{Phi}\command{phi} & \Phi\phi \\
+\command{Omega}\command{omega} & \Omega\omega \\
+\command{backslash} & \backslash \\
+\hline
+\end{tabular}
 
 \subsubsection{Implemented environments}
 \paragraph{In MarTeX an environment is defined as the area between a begin and matching end command:}

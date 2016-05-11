@@ -26,7 +26,7 @@ Some remarks before we get to adding functionality to the module:
 \end{itemize}
 That means we should save the example above as 'helloworld.php'.\\
 Now for adding functionality. There are three types of ways your module can add functionality: commands, environments and previronments. 
-\subsubsection{commands}
+\subsubsection{Commands}
 Commands are the most basic feature you can add to your module. In order to add them, you need to implement two methods in your class: \textit{registerCommands} and \textit{handleCommand}.
 \textit{registerCommands} should return the commands you want to process as an array of strings.
 \begin{code}{php}
@@ -44,21 +44,42 @@ Now, when the user types \backslashhelloworld in their source, it will compile t
 compile to the same thing! It will just ignore the argument, but we might want to give the user a warning about that. For that, we make a call to the MarTeX object, which we can
 access because we extended the MarTeXmodule class:
 \begin{code}{php}
-public function handleCommand(\$command, \$argument) {
-  if (is_array(\$argument) or \$argument != "")) {
+public function handleCommand(\$command, \$argument) \{
+  if (is_array(\$argument) or \$argument != "")) \{
     \$this-\>MarTeX-\>parseError("(MarTeX/Helloworld) Warning: more arguments supplied to helloworld then required.");
-  }
+  \}
   return "\<h1\>Hello, World!\</h1\>";
-}
+\}
 \end{code}
 You might notice that we first check if the argument is an array. That is because argument is an array if more then one argument is supplied, and a string when it is only a single argument. \\
 Now, this input validation might get a bit tedious when you have multiple arguments and commands. Therefore, there is helper function for this:
 \begin{code}{php}
-public function handleCommand(\$command, \$argument) {
+public function handleCommand(\$command, \$argument) \{
   \$argument = \$this-\>valisaniArgument(\$argument, 0, "");
   return "\<h1\>Hello, World!\</h1\>";
-}
+\}
 \end{code}
-The valisani function takes three arguments. The first argument is input, the second number is the supposed number of arguments and the third is for defining the arguments types.
+The valisani function takes three arguments. The first argument is input, the second number is the supposed number of arguments and the third is for defining the arguments types. This is best demonstrating by adding another command, let's try \command{multiply}{x}{y} with x and y some number:
+\begin{code}{php}
+public function registerCommands() \{
+  return array("helloworld", "multiply");
+\}
+
+public function handleCommand(\$command, \$argument) \{
+  switch(\$command) \{
+    case "helloworld":
+        \$argument = \$this-\>valisaniArgument(\$argument, 0, "");
+        return "\<h1\>Hello, World!\</h1\>";
+    case "multiply":
+        \$argument = \$this-\>valisaniArgument(\$argument, 2, array("Number", "Number"));
+        return strval(\$argument[0] * \$argument[1]);
+    \}
+\}
+\end{code}
+Normally, for the multiply to work, you'd have to check the numbers yourself, see if there are actually two numbers, cast them to numbers etc, but MarTeX does this for you and will generate warnings if the user inputs invalid arguments or doesn't supply enough of them.
+
+\subsubsection{Environments}
+Environments are areas in MarTeX source that are sandwiched between a begin and end tag. They allow you to do more complex operations on a piece of content. Environments are parsed \underline{after} commands. You can add an environment to your module by implementing the \textit{registerEnvironments} and \textit{handleEnvironment} function.
+
 
 

@@ -30,9 +30,11 @@
 
     <li><i>global:</i> <b>&#92;subsubsection&#123;Title&#125;</b><br><p>Make a subsubsection title.</p></li>
 
-    <li><i>global:</i> <b>&#92;textbf&#123;Text&#125;</b><br><p>Render Text in bold.</p></li>
+    <li><i>global:</i> <b>&#92;textbf&#123;Text&#125;</b><br><p>Render Text in <b>bold</b>.</p></li>
 
-    <li><i>global:</i> <b>&#92;textit&#123;Text&#125;</b><br><p>Render Text in italics.</p></li>
+    <li><i>global:</i> <b>&#92;textit&#123;Text&#125;</b><br><p>Render Text in <i>italics</i>.</p></li>
+
+    <li><i>global:</i> <b>&#92;underline&#123;Text&#125;</b><br><p>Render Text <u>underlined</u>.</p></li>
 
     <li><i>global:</i> <b>&#92;hline</b><br><p>Make a horizontal line.</p></li>
 
@@ -46,6 +48,73 @@
 
     \item{<i>global:</i> <b>&#92;href&#123;URL&#125;&#123;Text&#125;</b><br><p>Make a hyperlink to URL with text Text</p>
 </ul>
+
+<h4>Special characters</h4>
+MarTeX has some special characters you need to escape to render:
+<table cellpadding='4'; style='margin:6px;border-collapse:collapse;border-style:solid;border-width:0px;'>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-left: 1px solid black;text-align: left;'>  <b>Command</b> </td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'> <b>Result</b>  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-top: 3px double black;text-align: left;'>     &#92;,	    </td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;border-top: 3px double black;text-align: left;'>Small non-breaking space}  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;&amp;    </td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&amp;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;&#37;	</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&#37;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;&#36;   	</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&#36;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;copy	</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&copy;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;&gt;	</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&gt;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;&lt;	</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&lt;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;&#125;	</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&#125;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;&#123;	</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&#123;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;cdot	</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&middot;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;pm	</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&plusmn;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;euro	</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&euro;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;pound	</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&pound;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;tm	</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&trade;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;deg	</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&deg;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;"AaEeIiOoUuy</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&Auml;&auml;&Euml;&euml;&Iuml;&iuml;&Ouml;&ouml;&Uuml;&uuml;&yuml;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;'AaEeIiOoUuZ</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&Aacute;&aacute;&Eacute;&eacute;&Iacute;&iacute;&Oacute;&oacute;&Uacute;&uacute;&#180;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;`AaEeIiOoUu</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&Agrave;&agrave;&Egrave;&egrave;&Igrave;&igrave;&Ograve;&ograve;&Ugrave;&ugrave;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;^AaEeIiOoUu</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&Acirc;&acirc;&Ecirc;&ecirc;&Icirc;&icirc;&Ocirc;&ocirc;&Ucirc;&ucirc;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;~AaIiOoNnUu</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&Atilde;&atilde;&Itilde;&itilde;&Otilde;&otilde;&Ntilde;&ntilde;&Utilde;&utilde;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;.AaUu</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&Aring;&aring;&Uring;&uring;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;-O&#92;-o</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&Oslash;&oslash;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;ss</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&szlig;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;Alpha&#92;alpha</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&Alpha;&alpha;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;Beta&#92;beta</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&Beta;&beta;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> ...</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>...  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;Phi&#92;phi</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&Phi;&phi;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;Omega&#92;omega</td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&Omega;&omega;  </td>	</tr>
+	<tr>
+		<td style='min-width:20px;min-height:12px;border-bottom: 1px solid black;border-left: 1px solid black;text-align: left;'> &#92;backslash</td><td style='min-width:20px;min-height:12px;border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&#92;  </td>	</tr>
+	<tr>
+		</table>
+
 
 <h4>Implemented environments</h4>
 <p>In MarTeX an environment is defined as the area between a begin and matching end command:</p>
@@ -287,11 +356,11 @@ The only environment implemented by this module is the <i>tabular</i> environmen
 This results in:
 <table cellpadding='4'; style='margin:6px;border-collapse:collapse;border-style:solid;border-width:0px;'>
 	<tr>
-		<td style='min-width:20px;min-height:12px;border-top: 1px solid black;text-align: left;'>      1 </td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-left: 1px solid black;text-align: center;'> 2 </td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-right: 1px solid black;border-left: 3px double black;text-align: right;'> 3  </td>	</tr>
+		<td style='min-width:20px;min-height:12px;border-top: 1px solid black;text-align: left;'>      1</td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-left: 1px solid black;text-align: center;'>2</td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-right: 1px solid black;border-left: 3px double black;text-align: right;'>3  </td>	</tr>
 	<tr>
-		<td style='min-width:20px;min-height:12px;border-top: 1px solid black;text-align: left;'>   4 </td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-left: 1px solid black;text-align: center;'> 5 </td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-right: 1px solid black;border-left: 3px double black;text-align: right;'> 6  </td>	</tr>
+		<td style='min-width:20px;min-height:12px;border-top: 1px solid black;text-align: left;'>   4</td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-left: 1px solid black;text-align: center;'>5</td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-right: 1px solid black;border-left: 3px double black;text-align: right;'>6  </td>	</tr>
 	<tr>
-		<td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-bottom: 1px solid black;text-align: left;'>   7 </td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black;text-align: center;'> 8 </td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-bottom: 1px solid black;border-right: 1px solid black;border-left: 3px double black;text-align: right;'> 9  </td>	</tr>
+		<td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-bottom: 1px solid black;text-align: left;'>   7</td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black;text-align: center;'>8</td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-bottom: 1px solid black;border-right: 1px solid black;border-left: 3px double black;text-align: right;'>9  </td>	</tr>
 	<tr>
 		</table>
 
@@ -362,7 +431,7 @@ That's all there is to it! You now have a module that does nothing...<br>Some re
 
 </ul>
 That means we should save the example above as 'helloworld.php'.<br>Now for adding functionality. There are three types of ways your module can add functionality: commands, environments and previronments. 
-<h4>commands</h4>
+<h4>Commands</h4>
 Commands are the most basic feature you can add to your module. In order to add them, you need to implement two methods in your class: <i>registerCommands</i> and <i>handleCommand</i>.
 <i>registerCommands</i> should return the commands you want to process as an array of strings.
 <pre><code class="language-php">public function registerCommands() {
@@ -377,20 +446,40 @@ In the code example we have registered the command 'helloworld'. We now need to 
 Now, when the user types &#92;helloworld in their source, it will compile to &lt;h1&gt;Hello, World!&lt;/h1&gt;! But, if the user types &#92;helloworld&#123;InvalidArgument&#125;, it will also
 compile to the same thing! It will just ignore the argument, but we might want to give the user a warning about that. For that, we make a call to the MarTeX object, which we can
 access because we extended the MarTeXmodule class:
-<pre><code class="language-php">public function handleCommand(&#36;command, &#36;argument) {
-  if (is_array(&#36;argument) or &#36;argument != "")) {
+<pre><code class="language-php">public function handleCommand(&#36;command, &#36;argument) &#123;
+  if (is_array(&#36;argument) or &#36;argument != "")) &#123;
     &#36;this-&gt;MarTeX-&gt;parseError("(MarTeX/Helloworld) Warning: more arguments supplied to helloworld then required.");
-  }
+  &#125;
   return "&lt;h1&gt;Hello, World!&lt;/h1&gt;";
-}
+&#125;
 </code></pre>
 You might notice that we first check if the argument is an array. That is because argument is an array if more then one argument is supplied, and a string when it is only a single argument. <br>Now, this input validation might get a bit tedious when you have multiple arguments and commands. Therefore, there is helper function for this:
-<pre><code class="language-php">public function handleCommand(&#36;command, &#36;argument) {
+<pre><code class="language-php">public function handleCommand(&#36;command, &#36;argument) &#123;
   &#36;argument = &#36;this-&gt;valisaniArgument(&#36;argument, 0, "");
   return "&lt;h1&gt;Hello, World!&lt;/h1&gt;";
-}
+&#125;
 </code></pre>
-The valisani function takes three arguments. The first argument is input, the second number is the supposed number of arguments and the third is for defining the arguments types.
+The valisani function takes three arguments. The first argument is input, the second number is the supposed number of arguments and the third is for defining the arguments types. This is best demonstrating by adding another command, let's try &#92;multiply&#123;x&#125;&#123;y&#125; with x and y some number:
+<pre><code class="language-php">public function registerCommands() &#123;
+  return array("helloworld", "multiply");
+&#125;
+
+public function handleCommand(&#36;command, &#36;argument) &#123;
+  switch(&#36;command) &#123;
+    case "helloworld":
+        &#36;argument = &#36;this-&gt;valisaniArgument(&#36;argument, 0, "");
+        return "&lt;h1&gt;Hello, World!&lt;/h1&gt;";
+    case "multiply":
+        &#36;argument = &#36;this-&gt;valisaniArgument(&#36;argument, 2, array("Number", "Number"));
+        return strval(&#36;argument[0] * &#36;argument[1]);
+    &#125;
+&#125;
+</code></pre>
+Normally, for the multiply to work, you'd have to check the numbers yourself, see if there are actually two numbers, cast them to numbers etc, but MarTeX does this for you and will generate warnings if the user inputs invalid arguments or doesn't supply enough of them.
+
+<h4>Environments</h4>
+Environments are areas in MarTeX source that are sandwiched between a begin and end tag. They allow you to do more complex operations on a piece of content. Environments are parsed <u>after</u> commands. You can add an environment to your module by implementing the <i>registerEnvironments</i> and <i>handleEnvironment</i> function.
+
 
 
 

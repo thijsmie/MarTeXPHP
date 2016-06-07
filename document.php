@@ -5,7 +5,7 @@ require_once (__DIR__."/module.php");
 
 class Document extends MarTeXmodule {
     public function registerCommands() {
-        return array("section", "subsection", "subsubsection", "textbf", "textit", "underline", "hline", "ref", "refpass", "define", "newline", "paragraph", "title", "href"); 
+        return array("section", "subsection", "subsubsection", "textbf", "textit", "underline", "hline", "smallcaps", "ref", "refpass", "define", "newline", "paragraph", "title", "href"); 
     }
     
     public function handleCommand($command, $argument) {
@@ -29,6 +29,9 @@ class Document extends MarTeXmodule {
             case "underline":
                 $argument = $this->valisaniArgument($argument, 1, "String");
                 return "<u>".$argument."</u>";
+            case "smallcaps":
+                $argument = $this->valisaniArgument($argument, 1, "String");
+                return "<span style='font-variant: small-caps;'>".$argument."</span>";
             case "paragraph":
                 $argument = $this->valisaniArgument($argument, 1, "String");
                 return "<p>".$argument."</p>";

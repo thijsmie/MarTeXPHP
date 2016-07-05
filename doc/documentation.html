@@ -377,11 +377,10 @@ In the code example we have registered the command 'helloworld'. We now need to 
 }
 </code></pre>
 Now, when the user types &#92;helloworld in their source, it will compile to &lt;h1&gt;Hello, World!&lt;/h1&gt;! But, if the user types &#92;helloworld&#123;InvalidArgument&#125;, it will also
-compile to the same thing! It will just ignore the argument, but we might want to give the user a warning about that. For that, we make a call to the MarTeX object, which we can
-access because we extended the MarTeXmodule class:
+compile to the same thing! It will just ignore the argument, but we might want to give the user a warning about that. For that, we make a call to the the error raising functions, which we can access because we extended the MarTeXmodule class:
 <pre><code class="language-php">public function handleCommand(&#36;command, &#36;argument) &#123;
   if (is_array(&#36;argument) or &#36;argument != "")) &#123;
-    &#36;this-&gt;MarTeX-&gt;parseError("(MarTeX/Helloworld) Warning: more arguments supplied to helloworld then required.");
+    &#36;this-&gt;raiseWarning("More arguments supplied to helloworld then required.");
   &#125;
   return "&lt;h1&gt;Hello, World!&lt;/h1&gt;";
 &#125;
@@ -401,7 +400,7 @@ The valisani function takes three arguments. The first argument is input, the se
         &#36;argument = &#36;this-&gt;valisaniArgument(&#36;argument, 0, "");
         return "&lt;h1&gt;Hello, World!&lt;/h1&gt;";
     case "multiply":
-        &#36;argument = &#36;this-&gt;valisaniArgument(&#36;argument, 2, array("Number", "Number"));
+        &#36;argument = &#36;this-&gt;valisaniArgument(&#36;argument, 2, array("Integer", "Integer"));
         return strval(&#36;argument[0] * &#36;argument[1]);
     &#125;
 &#125;

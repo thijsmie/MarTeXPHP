@@ -41,12 +41,11 @@ public function handleCommand(\$command, \$argument) {
 }
 \end{code}
 Now, when the user types \backslashhelloworld in their source, it will compile to \<h1\>Hello, World!\</h1\>! But, if the user types \backslashhelloworld\{InvalidArgument\}, it will also
-compile to the same thing! It will just ignore the argument, but we might want to give the user a warning about that. For that, we make a call to the MarTeX object, which we can
-access because we extended the MarTeXmodule class:
+compile to the same thing! It will just ignore the argument, but we might want to give the user a warning about that. For that, we make a call to the the error raising functions, which we can access because we extended the MarTeXmodule class:
 \begin{code}{php}
 public function handleCommand(\$command, \$argument) \{
   if (is_array(\$argument) or \$argument != "")) \{
-    \$this-\>MarTeX-\>parseError("(MarTeX/Helloworld) Warning: more arguments supplied to helloworld then required.");
+    \$this-\>raiseWarning("More arguments supplied to helloworld then required.");
   \}
   return "\<h1\>Hello, World!\</h1\>";
 \}
@@ -71,7 +70,7 @@ public function handleCommand(\$command, \$argument) \{
         \$argument = \$this-\>valisaniArgument(\$argument, 0, "");
         return "\<h1\>Hello, World!\</h1\>";
     case "multiply":
-        \$argument = \$this-\>valisaniArgument(\$argument, 2, array("Number", "Number"));
+        \$argument = \$this-\>valisaniArgument(\$argument, 2, array("Integer", "Integer"));
         return strval(\$argument[0] * \$argument[1]);
     \}
 \}

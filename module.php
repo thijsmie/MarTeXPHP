@@ -1,33 +1,76 @@
 <?php
 namespace MarTeX;
 
-interface IMarTeXmodule {
-    // Handle should handle commands added by register
-    public function handleCommand($command, $argument);
-    public function registerCommands();
-    public function handleEnvironment($environment, $options, $text);
-    public function registerEnvironments();
-    public function reset();
-}
-
 abstract class MarTeXmodule {
     // Parent variable, so you can access the envvars
     public $MarTeX;
+    
+    public function raiseWarning($warning) {
+        $this->MarTeX->parseModuleWarning(get_class($this), $warning);
+    }
+    
+    public function raiseError($error) {
+        $this->MarTeX->parseModuleError(get_class($this), $error);
+    }
 
     public function valisaniArgument($argument, $number, $valisani) {
+        if ($number > 1 && !is_array($valisani)) {
+            $valisani = array_fill(0, $number, $valisani);
+        }
+        
         if($number == 1 && is_array($argument)) {
-            $this->MarTeX->parseError("(MarTeX) Warning: Too many arguments supplied to command.");
-            return $argument[0];
+            $this->raiseWarning("Too many arguments supplied to command.");
+            return $this->sanitize($argument[0], $valisani);
         }
         if (($number > 1 && !is_array($argument) ) || ( $number > 1 && count($argument) < $number)) {
-            $this->MarTeX->parseError("(MarTeX) Error: Not enough arguments supplied to command.");
-            return array_fill(0, $number, ""); 
+            $this->raiseError("Not enough arguments supplied to command.");
+            return $this->sanitize(array_fill(0, $number, ""), $valisani); 
         }
         if($number > 1 && count($argument) > $number) {
-            $this->MarTeX->parseError("(MarTeX) Warning: Too many arguments supplied to command.");
-            return $argument;
+            $this->raiseWarning("Too many arguments supplied to command.");
+            return $this->sanitize(array_slice($argument, 0, $number), $valisani);
         }
-        return $argument; 
+        return $this->sanitize($argument, $valisani); 
+    }
+    
+    public function sanitize($var, $type) {
+        if (is_array($var)) {
+            for($i = 0; $i < count($var); $i++) {
+                $var[$i] = $this->sanitize($var[$i], $type[$i]);
+            }
+            return $var;
+        }
+        else {
+            $types = explode('/', $type);
+            if (count($types) > 1) {
+                for($i = 0; $i < count($types); $i++) {
+                    $var = $this->sanitize($var, $types[$i]);
+                }
+                return $var;
+            }
+            else {
+                switch($type) {
+                    case "String":
+                        return $var;
+                    break;
+                    case "Integer":
+                        if (is_numeric($var)) {
+                            return intval($var);
+                        }
+                        else {
+                            $this->raiseWarning("Argument ".$var." could not be parsed to integer.");
+                            return 0;
+                        }
+                    break;
+                    case "nowhitespace":
+                        return preg_replace('/\s+/', '', $var);
+                    break;
+                    case "":
+                        return $var;
+                    break;
+                }
+            }
+        }
     }
     
     public static function str_replace_all($from, $to, $subject)

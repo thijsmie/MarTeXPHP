@@ -23,6 +23,8 @@ class MarTeX {
             $code[] = '/' . preg_quote($kv[0]). '/m';
             $replace[] = $kv[1];
         }
+        $code[] = '/\\n\\s*\\n/m';
+        $replace[] = "<br><br>";
         fclose($char);
         $this->_simple_replace_array = array($code, $replace);
     }
@@ -92,18 +94,9 @@ class MarTeX {
      * html tags are in the source
      **/
     public function syntaxValidity($text) {
-        $num_leftbraces = 0;
-        preg_match_all('/[^\\\\](\\{+)/mi', $text, $matches);
-        for($i = 0; $i < count($matches); $i++) {
-            $num_leftbraces += strlen($matches[$i][1]);            
-        }
-        
-        $num_rightbraces = 0;
-        preg_match_all('/[^\\\\](\\}+)/mi', $text, $matches);
-        for($i = 0; $i < count($matches); $i++) {
-            $num_rightbraces += strlen($matches[$i][1]);            
-        }
-        
+        $num_leftbraces = substr_count($text, '{') - substr_count($text, "\\{");
+        $num_rightbraces = substr_count($text, '}') - substr_count($text, "\\}");
+
         if ($num_leftbraces != $num_rightbraces) {
             $this->parseError(
                     "(MarTeX/Syntax) Fatal: Unmatched braces in text. Make sure braces that"
@@ -111,7 +104,7 @@ class MarTeX {
             return false;
         }
         
-        $num_forbidden_special = preg_match_all('/[^\\\\](?:\\>|\\<|¦|ƒ|¬)/', $text, $some3);
+        $num_forbidden_special = preg_match_all('/[^\\\\](?:\\>|\\<|¦|ƒ|¬)/m', $text, $some3);
         if ($num_forbidden_special > 0) {
             $this->parseError(
                     "(MarTeX/Syntax) Fatal: Unescaped special characters in text."); 
@@ -333,14 +326,16 @@ class MarTeX {
         // Check for recursive include count
         $checkenv = count($this->_EnvStack);
         
-        // Parse the special environments
-        $text = $this->specialEnvReplacePass($text);
-        
         // Check syntax
         if (!$this->syntaxValidity($text)) {
             $this->_Result = "Fatal error: no output produced.";
             return false;
         }
+        
+        // Parse the special environments
+        $text = $this->specialEnvReplacePass($text);
+        
+        
         
         // Parse with simplereplace (No need for recursion)
         $text = $this->simpleReplacePass($text);
@@ -430,6 +425,38 @@ class MarTeX {
             $this->_Error = $error;
         } else {
             $this->_Error .= "\n" . $error;
+        }
+    }
+    
+    /**
+     * Function: parseModuleError (module string, error string )
+     * Raise a parse error, to be seen by the user.
+     * Note that this does not stop the parsing execution.
+     * Returns: None
+     **/
+    public function parseModuleError($module, $error) {
+        $this->_newError = true;
+        if(!$this->_Error) {
+            $this->_hasError = true;
+            $this->_Error = "(".$module.") Error: ".$error;
+        } else {
+            $this->_Error .= "\n(".$module.") Error: ".$error;
+        }
+    }
+    
+    /**
+     * Function: parseModuleWarning (module string, error string )
+     * Raise a parse error, to be seen by the user.
+     * Note that this does not stop the parsing execution.
+     * Returns: None
+     **/
+    public function parseModuleWarning($module, $error) {
+        $this->_newError = true;
+        if(!$this->_Error) {
+            $this->_hasError = true;
+            $this->_Error = "(".$module.") Warning: ".$error;
+        } else {
+            $this->_Error .= "\n(".$module.") Warning: ".$error;
         }
     }
 

@@ -39,7 +39,7 @@ class Soa extends MarTeXmodule {
                     $path = __DIR__."/".$path;
                 }
                 if (!file_exists($path.'/'.$argument.".tex")) {
-                    $this->MarTeX->parseError("(MarTeX/Soa) Error: include file '".$path.'/'.$argument.".tex"."' does not exist.");
+                    $this->raiseError("Include file '".$path.'/'.$argument.".tex"."' does not exist.");
                     return "";
                 }
                 
@@ -50,7 +50,7 @@ class Soa extends MarTeXmodule {
             break;
             case "usepackage":
                 if (!file_exists(__DIR__.'/'.$argument.".php")) {
-                    $this->MarTeX->parseError("(MarTeX/Soa) Error: module '".__DIR__.'/'.$argument.".php"."' does not exist.");
+                    $this->raiseError("Module '".__DIR__.'/'.$argument.".php"."' does not exist.");
                     return "";
                 }
                 require_once (__DIR__.'/'.$argument.".php");
@@ -62,7 +62,7 @@ class Soa extends MarTeXmodule {
                 return "<link href='".$argument[0]."' rel='".$argument[1]."' type='".$argument[2]."' />";
             
             case "document/link":
-                $this->MarTeX->parseError("(MarTeX/Soa) Error: link statements should occur before document.");
+                $this->raiseError("Link statements should occur before document.");
                 return "";
                    
             case "page/script":

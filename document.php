@@ -57,7 +57,7 @@ class Document extends MarTeXmodule {
                 if ($reference === false) {
                     // This label is not defined on second pass, throw warning.
                     // Note, this means backward declaration of dynamic labels is not allowed, but forwards is!
-                    $this->MarTeX->parseError("(MarTeX/Document) Error: reference label '".$argument."' was not declared.");
+                    $this->raiseError("Reference label '".$argument."' was not declared.");
                     return "?";
                 }
                 return $reference;

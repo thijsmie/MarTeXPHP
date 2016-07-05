@@ -15,13 +15,13 @@ class Counter extends MarTeXmodule {
                 $this->MarTeX->setGlobalVar("counter_".$argument, 1);
                 return "";
             case "addtocounter":
-                $argument = $this->valisaniArgument($argument, 2, array("String", "Int"));
+                $argument = $this->valisaniArgument($argument, 2, array("String", "Integer"));
                 $this->MarTeX->setGlobalVar("counter_".$argument[0], 
                     $this->MarTeX->getGlobalVar("counter_".$argument[0])
                     + intval($argument[1]));
                 return "";
             case "setcounter":
-                $argument = $this->valisaniArgument($argument, 2, array("String", "Int"));
+                $argument = $this->valisaniArgument($argument, 2, array("String", "Integer"));
                 $this->MarTeX->setGlobalVar("counter_".$argument[0], 
                     intval($argument[1]));
                 return "";

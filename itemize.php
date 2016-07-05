@@ -59,7 +59,7 @@ class Itemize extends MarTeXmodule{
                 case "ROMAN":
                     return "<ol type='I'>\n".$text."</ol>";
                 default:
-                    $this->$MarTeX->parseError("(MarTeX/Itemize) Error: ".$vars["marker"]." is not a valid itemize marker.");
+                    $this->raiseError($vars["marker"]." is not a valid itemize marker.");
                     if ($env == "enumerate") {
                         return "<ol>\n".$text."</ol>";
                     }

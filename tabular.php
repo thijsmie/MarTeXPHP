@@ -65,7 +65,7 @@ class Tabular extends MarTeXmodule{
                     $curlineborderstyle = 1;
                 break;
                 default:
-                    $this->MarTeX->parseError("(MarTeX/Tabular) Error: Only 2 hlines allowed per row, ommitting extra.");
+                    $this->raiseError("Only 2 hlines allowed per row, ommitting extra.");
                 case 2:
                     $curlineborderstyle = 16;
                 break;
@@ -90,7 +90,7 @@ class Tabular extends MarTeXmodule{
                             $curlineborderstyle += 2;
                         break;
                         default:
-                            $this->MarTeX->parseError("(MarTeX/Tabular) Error: Only 2 hlines allowed per row, ommitting extra.");
+                            $this->raiseError("Only 2 hlines allowed per row, ommitting extra.");
                         case 2:
                             $curlineborderstyle = 32;
                         break;
@@ -105,10 +105,10 @@ class Tabular extends MarTeXmodule{
             }
             
             if (count($cells) > count($colspec)) {
-                $this->MarTeX->parseError("(MarTeX/Tabular) Error: Too many elements in row ".intval($i+1).".");
+                $this->raiseError("Too many elements in row ".intval($i+1).".");
             }
             else if (count($cells) < count($colspec)) {
-                $this->MarTeX->parseError("(MarTeX/Tabular) Warning: Not enough elements in row ".intval($i+1).".");
+                $this->raiseWarning("Not enough elements in row ".intval($i+1).".");
                 while (count($cells) < count($colspec)) {
                     $cells[] = "";
                 }
@@ -192,8 +192,7 @@ class Tabular extends MarTeXmodule{
                             $colspec[] = 4+256+512;
                         break;
                         default:
-                            $this->MarTeX->parseError("(MarTeX/Tabular) Warning:".
-                                " Too many |'s in column specification '".$cols."', ignoring extra.");
+                            $this->raiseWarning("Too many |'s in column specification '".$cols."', ignoring extra.");
                         case 2:
                             $colspec[] = 64+256+512;
                         break;
@@ -209,8 +208,7 @@ class Tabular extends MarTeXmodule{
                             $colspec[] = 4+256;
                         break;
                         default:
-                            $this->MarTeX->parseError("(MarTeX/Tabular) Warning:".
-                                " Too many |'s in column specification '".$cols."', ignoring extra.");
+                            $this->raiseWarning("Too many |'s in column specification '".$cols."', ignoring extra.");
                         case 2:
                             $colspec[] = 64+256;
                         break;
@@ -226,8 +224,7 @@ class Tabular extends MarTeXmodule{
                             $colspec[] = 4+512;
                         break;
                         default:
-                            $this->MarTeX->parseError("(MarTeX/Tabular) Warning: ".
-                                "Too many |'s in column specification '".$cols."', ignoring extra.");
+                            $this->raiseWarning("Too many |'s in column specification '".$cols."', ignoring extra.");
                         case 2:
                             $colspec[] = 64+512;
                         break;
@@ -245,8 +242,7 @@ class Tabular extends MarTeXmodule{
                 $colspec[count($colspec)-1] += 8;
             break;
             default:
-                $this->MarTeX->parseError("(MarTeX/Tabular) Warning: ".
-                    "Too many |'s in column specification '".$cols."', ignoring extra.");
+                $this->raiseWarning("Too many |'s in column specification '".$cols."', ignoring extra.");
             case 2:
                 $colspec[count($colspec)-1] += 128;
             break;

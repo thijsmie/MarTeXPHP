@@ -12,13 +12,13 @@ class Document extends MarTeXmodule {
 
         switch($command) {
             case "section":
-                $argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");
+                $argument = $this->valisaniArgument($argument, 1, "String");
                 return "<h2>".$argument."</h2>";
             case "subsection":
-                $argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");
+                $argument = $this->valisaniArgument($argument, 1, "String");
                 return "<h3>".$argument."</h3>";
             case "subsubsection":
-                $argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");
+                $argument = $this->valisaniArgument($argument, 1, "String");
                 return "<h4>".$argument."</h4>";
             case "textbf":
                 $argument = $this->valisaniArgument($argument, 1, "String");

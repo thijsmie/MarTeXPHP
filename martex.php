@@ -23,8 +23,6 @@ class MarTeX {
             $code[] = '/' . preg_quote($kv[0]). '/m';
             $replace[] = $kv[1];
         }
-        $code[] = '/\\n\\s*\\n/m';
-        $replace[] = "<br><br>";
         fclose($char);
         $this->_simple_replace_array = array($code, $replace);
     }

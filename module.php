@@ -51,7 +51,7 @@ abstract class MarTeXmodule {
             else {
                 switch($type) {
                     case "String":
-                        return $var;
+                        return trim($var);
                     break;
                     case "Integer":
                         if (is_numeric($var)) {
@@ -64,6 +64,9 @@ abstract class MarTeXmodule {
                     break;
                     case "nowhitespace":
                         return preg_replace('/\s+/', '', $var);
+                    break;
+                    case "StringList":
+                        return array_map('trim', explode(',', $var));
                     break;
                     case "":
                         return $var;

@@ -1,6 +1,4 @@
-\begin{paragraph}
-    The document module exposes the basic commands that are designed to mimick the LaTeX main environment.
-\end{paragraph}
+The document module exposes the basic commands that are designed to mimick the LaTeX main environment.
 
 \subsubsection{Implemented commands}
 \begin{itemize}
@@ -17,7 +15,9 @@
     \item{\descriptor{global}{\command{paragraph}{text}}{Render the text as a paragraph, normally not noticable, but might have implications if a stylesheet is loaded. Use for a single line of text without commands only, please use the environment \textit{paragraph} otherwise.}}
     \item{\descriptor{global}{\command{ref}{label}}{Reference a label (from an image, for example). Works with both forward and backwards declaration (The label can be both above and below the ref command). Outputs a question mark when the label is undefined.}}
     \item{\descriptor{global}{\command{define}{Variable}{Value}}{Set the global Variable to Value. Often used to change module behaviour.}}
-    \item{\descriptor{global}{\command{href}{URL}{Text}}{Make a hyperlink to URL with text Text}
+    \item{\descriptor{global}{\command{href}{URL}{Text}}{Make a hyperlink to URL with text Text}}
+    \item{\descriptor{global}{\command{colo(u)r}{type}{definition}{text}}{Change the colour of a piece of text. There are a few possibilities: \colour{rgb}{255,0,100}{\command{colour}{rgb}{255,0,100}{text}}, \colour{rgba}{255,100,255,0.7}{\command{colour}{rgba}{100,100,255,0.7}}, \colour{hsl}{200,50,50}{\command{colour}{hsl}{200,50,50}{text}}, \colour{hsla}{200,50,50,0.7}{\command{colour}{hsla}{200,50,50,0.7}{text}} and \colour{hex}{#ff00ff}{\command{colour}{hex}{#ff00ff}{text}}. Please note that hsl and hsla are not supported by all browsers (especially email clients).}}
+    \item{\descriptor{global}{\command{colo(u)r}{definition}{text}}{Same as above, but allow MarTeX to guess your colour type. Will always choose rgb over hsl.}}
 \end{itemize}
 
 \subsubsection{Special characters}
@@ -26,7 +26,7 @@ MarTeX has some special characters you need to escape to render:
 \hline
 \textbf{Command}  &  \textbf{Result} \\
 \hline \hline
-\command{,}	     & Small non-breaking space} \\
+\command{,}	     & Small non-breaking space \\
 \command{\&}     & \& \\
 \command{\%}	 & \% \\
 \command{\$}   	 & \$ \\
@@ -59,7 +59,8 @@ MarTeX has some special characters you need to escape to render:
 \end{tabular}
 
 \subsubsection{Implemented environments}
-\paragraph{In MarTeX an environment is defined as the area between a begin and matching end command:}
+In MarTeX an environment is defined as the area between a begin and matching end command:
+
 \begin{code}{latex}
 \begin{verbatim}
 \begin{Environment} 
@@ -73,7 +74,6 @@ MarTeX has some special characters you need to escape to render:
     \item{\envdescriptor{paragraph}{Does the same as the command 'paragraph', but now with begin and end commands. Works better for multiline paragraphs.}}
     \item{\envdescriptor{code}{Wrapper for the html 'pre' environment. Stuff in this environment is displayed with all whitespace intact (tabs, newlines, etc)}}
 \end{itemize}
-
 
 \subsubsection{Example}
 \begin{code}{latex} 

@@ -74,7 +74,20 @@ class MarTeX {
         }
         return false;
     }
-
+    
+    /**
+     * Function: paragraphDetectorPass(text)
+     * This function cheats the system to add hint commands for paragraph breaks (empty line)
+     * This function is ugly and is only here because Luc forced me to add it.
+     * Returns: text with paragraph break hints
+     **/
+    public function paragraphDetectorPass($text) {
+        $re = "/(\\n\\n)/m"; 
+        $subst = "\\par "; 
+         
+        return preg_replace($re, $subst, $text);
+    }
+     
     /**
      * Function: simpleReplacePass ( text to work on )
      * Do all simple replaces in text. These are mostly
@@ -333,16 +346,19 @@ class MarTeX {
         // Parse the special environments
         $text = $this->specialEnvReplacePass($text);
         
-        
+        // Parse the special paragraph detection
+        $text = $this->paragraphDetectorPass($text);
         
         // Parse with simplereplace (No need for recursion)
         $text = $this->simpleReplacePass($text);
         
         // Parse with complexreplace
+        $this->setGlobalVar("RunNumber", 0);
         do {
             $oldtext = $text;
             $text = $this->complexPreProcess($text);
             $text = $this->complexReplacePass($text);
+            $this->setGlobalVar("RunNumber", $this->getGlobalVar("RunNumber") + 1);
         }
         while($oldtext != $text);
         

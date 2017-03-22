@@ -9,7 +9,7 @@ class Figure extends MarTeXmodule {
     }
     
     public function registerCommands() {
-        return array("figure/caption", "figure/includegraphics", "figure/width", "figure/height", "figure/alttext", "figure/label"); 
+        return array("figure/caption", "figure/includegraphics", "figure/width", "figure/height", "figure/alttext", "figure/label", "figure/inline"); 
     }
     
     public function handleCommand($command, $argument) {
@@ -35,6 +35,8 @@ class Figure extends MarTeXmodule {
                 }
                 $this->MarTeX->setGlobalVar("label:".$argument, $this->MarTeX->getGlobalVar("figureheader")." ".$this->_labelNumber);     
                 return ModuleTools::setVar("label", ucfirst($this->MarTeX->getGlobalVar("figureheader"))." ".$this->_labelNumber);     
+            case "figure/inline":
+                return ModuleTools::setVar("inline", "");
         }
     }
     
@@ -47,12 +49,20 @@ class Figure extends MarTeXmodule {
         $output = "<figure>\n";
         
         // Image
-        if (array_key_exists("image", $vars)) {
+        if (array_key_exists("inline", $vars)) {
+            if (!array_key_exists("image", $vars)) {
+                $this->raiseError("Environment 'figure' did not contain an image.");
+            }
+            else {
+                $data = file_get_contents($vars["image"]);
+                $output .= "<img>data:image/x-icon;base64,".base64_encode($data)."</img>";
+            }
+        }
+        else if (array_key_exists("image", $vars)) {
             $output .= "<img src='".$vars["image"]."' ";
         }
         else {
-            $this->MarTeX->parseError("(MarTeX/Figure) Warning: Environment 'figure' did not contain an image.");
-            $output .= "<img src='NOOOOH.png' ";
+            $this->raiseError("Environment 'figure' did not contain an image.");
         }
         
         // Optional stuff

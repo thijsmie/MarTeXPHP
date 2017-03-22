@@ -18,6 +18,8 @@ class Figure extends MarTeXmodule {
             case "figure/caption":
                 return ModuleTools::setVar("caption", $argument);
             case "figure/includegraphics":
+                $argument = preg_replace("([^\w\s\d\-_~,;\[\]\(\).])", '', $argument);
+                $argument = preg_replace("([\.]{2,})", '', $argument);
                 return ModuleTools::setVar("image", $argument);
             case "figure/width":
                 return ModuleTools::setVar("width", $argument);
@@ -55,7 +57,7 @@ class Figure extends MarTeXmodule {
             }
             else {
                 $data = file_get_contents($vars["image"]);
-                $output .= "<img>data:image/x-icon;base64,".base64_encode($data)."</img>";
+                $output .= "<img src='data:".mime_content_type ($vars["image"]).";base64,".base64_encode($data)."' ";
             }
         }
         else if (array_key_exists("image", $vars)) {
@@ -78,7 +80,7 @@ class Figure extends MarTeXmodule {
             $output.= "height='".$vars["height"]."' ";
         }
         
-        $output.= ">\n";
+        $output.= "/>\n";
         
         // Caption
         if (array_key_exists("caption", $vars)) {

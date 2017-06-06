@@ -29,8 +29,15 @@
         \command{caption}{This is a test image}
         \command{label}{testimage}
         \command{width}{120px}
-        \command{height}{30\%}
         \command{alttext}{A mouse!}
     \command{end}{figure} 
 \end{code}
 
+\begin{figure}
+    \includegraphics{testimage.gif}
+    \caption{This is a test image}
+    \inline
+    \label{testimage}
+    \width{120px}
+    \alttext{A mouse!}
+\end{figure} 

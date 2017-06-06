@@ -3,8 +3,6 @@
 
 
 
-
-
 <link href='prism.css' rel='stylesheet' type='text/css' />
 
 </head><body>
@@ -16,11 +14,7 @@
 	</p>
 	<h2>Modules</h2>
 		<h3>Module Document</h3>
-			<p>
-    The document module exposes the basic commands that are designed to mimick the LaTeX main environment.
-</p>
-
-<h4>Implemented commands</h4>
+			The document module exposes the basic commands that are designed to mimick the LaTeX main environment.<br><br><h4>Implemented commands</h4>
 <ul>
 
     <li><i>global:</i> <b>&#92;title&#123;Title&#125;</b><br><p>Make a big fancy title.</p></li>
@@ -49,16 +43,19 @@
 
     <li><i>global:</i> <b>&#92;define&#123;Variable&#125;&#123;Value&#125;</b><br><p>Set the global Variable to Value. Often used to change module behaviour.</p></li>
 
-    \item{<i>global:</i> <b>&#92;href&#123;URL&#125;&#123;Text&#125;</b><br><p>Make a hyperlink to URL with text Text</p>
-</ul>
+    <li><i>global:</i> <b>&#92;href&#123;URL&#125;&#123;Text&#125;</b><br><p>Make a hyperlink to URL with text Text</p></li>
 
-<h4>Special characters</h4>
+    <li><i>global:</i> <b>&#92;colo(u)r&#123;type&#125;&#123;definition&#125;&#123;text&#125;</b><br><p>Change the colour of a piece of text. There are a few possibilities: <span style='color:rgb(255,0,100)'>&#92;colour&#123;rgb&#125;&#123;255,0,100&#125;&#123;text&#125;</span>, <span style='color:rgba(255,100,255,0.7)'>&#92;colour&#123;rgba&#125;&#123;100,100,255,0.7&#125;</span>, <span style='color:hsl(200,50%,50%)'>&#92;colour&#123;hsl&#125;&#123;200,50,50&#125;&#123;text&#125;</span>, <span style='color:hsla(200,50%,50%,0.7)'>&#92;colour&#123;hsla&#125;&#123;200,50,50,0.7&#125;&#123;text&#125;</span> and <span style='color:#ff00ff'>&#92;colour&#123;hex&#125;&#123;#ff00ff&#125;&#123;text&#125;</span>. Please note that hsl and hsla are not supported by all browsers (especially email clients).</p></li>
+
+    <li><i>global:</i> <b>&#92;colo(u)r&#123;definition&#125;&#123;text&#125;</b><br><p>Same as above, but allow MarTeX to guess your colour type. Will always choose rgb over hsl.</p></li>
+
+</ul><br><br><h4>Special characters</h4>
 MarTeX has some special characters you need to escape to render:
 <table cellpadding='4'; style='margin:6px;border-collapse:collapse;border-style:solid;border-width:0px;'>
 	<tr>
 		<td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-left: 1px solid black;text-align: left;'>  <b>Command</b> </td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'> <b>Result</b>  </td>	</tr>
 	<tr>
-		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-top: 3px double black;text-align: left;'>     &#92;,	    </td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;border-top: 3px double black;text-align: left;'>Small non-breaking space}  </td>	</tr>
+		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-top: 3px double black;text-align: left;'>     &#92;,	    </td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;border-top: 3px double black;text-align: left;'>Small non-breaking space  </td>	</tr>
 	<tr>
 		<td style='min-width:20px;min-height:12px;border-left: 1px solid black;text-align: left;'> &#92;&amp;    </td><td style='min-width:20px;min-height:12px;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&amp;  </td>	</tr>
 	<tr>
@@ -117,16 +114,11 @@ MarTeX has some special characters you need to escape to render:
 		<td style='min-width:20px;min-height:12px;border-bottom: 1px solid black;border-left: 1px solid black;text-align: left;'> &#92;backslash</td><td style='min-width:20px;min-height:12px;border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;text-align: left;'>&#92;  </td>	</tr>
 	<tr>
 		</table>
-
-
-<h4>Implemented environments</h4>
-<p>In MarTeX an environment is defined as the area between a begin and matching end command:</p>
-<pre><code class="language-latex">&#92;begin&#123;Environment&#125; 
+<br><br><h4>Implemented environments</h4>
+In MarTeX an environment is defined as the area between a begin and matching end command:<br><br><pre><code class="language-latex">&#92;begin&#123;Environment&#125; 
     Environment content
 &#92;end&#123;Environment&#125; 
-</code></pre>
-
-<ul>
+</code></pre><br><br><ul>
 
     <li><i>document:</i> <br><p>Does basically nothing right now, but might do in the future. For now it is there for the TeX code-style idea.</p></li>
 
@@ -134,10 +126,7 @@ MarTeX has some special characters you need to escape to render:
 
     <li><i>code:</i> <br><p>Wrapper for the html 'pre' environment. Stuff in this environment is displayed with all whitespace intact (tabs, newlines, etc)</p></li>
 
-</ul>
-
-
-<h4>Example</h4>
+</ul><br><br><h4>Example</h4>
 <pre><code class="language-latex"> &#92;define&#123;marie&#125;&#123;cool&#125;
     &#92;title&#123;My Website&#125;
     &#92;begin&#123;document&#125;
@@ -153,9 +142,7 @@ MarTeX has some special characters you need to escape to render:
             &#92;end&#123;code&#125;       
         &#92;ref&#123;NotDefinedLabel&#125;
     &#92;end&#123;document&#125; 
-</code></pre>
-
-After rendering this results in: <br><h1>My Website</h1>
+</code></pre><br><br>After rendering this results in: <br><h1>My Website</h1>
         <h2>Chapter One</h2>
         <h3>Whoarewe</h3>
         <p>
@@ -171,9 +158,7 @@ After rendering this results in: <br><h1>My Website</h1>
 			<p>
     The figure module exposes commands that are designed to mimick the LaTeX package graphicx, with a few exceptions. 
     Maybe the most notable exception is that most of these commands only work inside a figure environment, and will result in "command not found" errors if you use them elsewhere.
-</p>
-
-<h4>Implemented commands</h4>
+</p><br><br><h4>Implemented commands</h4>
 <ul>
 
     <li><i>figure:</i> <b>&#92;includegraphics&#123;path/to/image&#125;</b><br><p>Use to display an image.</p></li>
@@ -183,49 +168,42 @@ After rendering this results in: <br><h1>My Website</h1>
     <li><i>figure:</i> <b>&#92;label&#123;label text&#125;</b><br><p>Use to give your image a label, 
                                             so you can use <i>&#92;ref&#123;label&#125;</i> to reference it.</p></li>
 
-    <li><i>figure:</i> <b>&#92;width&#123;Width&#125;</b><br><p> Set the width of your image. 
-                    Width can have the following formats: 10px, 10&#37;, 10cm. </p></li>
+    <li><i>figure:</i> <b>&#92;width&#123;Width&#125;</b><br><p>Set the width of your image. 
+                    Width can have the following formats: 10px, 10&#37;, 10cm.</p></li>
 
-    <li><i>figure:</i> <b>&#92;height&#123;Height&#125;</b><br><p> Set the height of your image. 
-                    Height can have the following formats: 10px, 10&#37;, 10cm. </p></li>
+    <li><i>figure:</i> <b>&#92;height&#123;Height&#125;</b><br><p>Set the height of your image. 
+                    Height can have the following formats: 10px, 10&#37;, 10cm.</p></li>
 
     <li><i>figure:</i> <b>&#92;alttext&#123;alt text&#125;</b><br><p>Set the alt text, also called hovertext, of your image.</p></li>
 
-</ul>
-
-<h4>Settings</h4>
+</ul><br><br><h4>Settings</h4>
 <p>
     Reference labels are used to point to your image from the text. They put the following text in your caption: Figure N, where N is replaced with the number of your image. However, you might want to use a different text. For this you can access the global variable 'figureheader'. For example, you could do: &#92;define&#123;figureheader&#125;&#123;image&#125;. Now, the caption wil read: Image N. You should put the &#92;define above all figure environments.
-</p>
-
-<h4>Example</h4>
+</p><br><br><h4>Example</h4>
 <pre><code class="language-latex">    &#92;define&#123;figureheader&#125;&#123;image&#125;
     &#92;begin&#123;figure&#125;
         &#92;includegraphics&#123;test.png&#125;
         &#92;caption&#123;This is a test image&#125;
         &#92;label&#123;testimage&#125;
         &#92;width&#123;120px&#125;
-        &#92;height&#123;30&#37;&#125;
         &#92;alttext&#123;A mouse!&#125;
     &#92;end&#123;figure&#125; 
-</code></pre>
-
+</code></pre><br><br><figure>
+<img src='data:image/gif;base64,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' alt='Amouse!' width='120px' />
+<figcaption>Figure 1: Thisisatestimage</figcaption>
+</figure> 
 
 		<h3>Module Itemize</h3>
 			<p>
     The itemize module exposes commands to help make fancy lists.
-</p>
-
-<h4>Implemented commands</h4>
+</p><br><br><h4>Implemented commands</h4>
 <ul>
 
     <li><i>itemize/enumerate:</i> <b>&#92;item&#123;Itemtext&#125;</b><br><p>Add an item to a list.</p></li>
 
     <li><i>itemize/enumerate:</i> <b>&#92;setmarker&#123;type&#125;</b><br><p>Set the marker type. Valid types are: square, bullet, circle, none, numbers, letters, LETTERS, roman, ROMAN.</p></li>
 
-</ul>
-
-<h4>Implemented environments</h4>
+</ul><br><br><h4>Implemented environments</h4>
 <p>
 The itemize module implements two environments. They are equivalent, but have a different default marker type.
 </p>
@@ -235,10 +213,7 @@ The itemize module implements two environments. They are equivalent, but have a 
 
     <li><i>paragraph:</i> <br><p>A list with default marker 'numbers'</p></li>
 
-</ul>
-
-
-<h4>Example</h4>
+</ul><br><br><h4>Example</h4>
 <pre><code class="language-latex"> &#92;begin&#123;itemize&#125;
     &#92;item&#123;Akcie&#125;
     &#92;item&#123;Ambicie&#125;
@@ -272,9 +247,7 @@ The itemize module implements two environments. They are equivalent, but have a 
     &#92;item&#123;WWW-cie&#125;
     &#92;item&#123;Co&#92;"ordinatiecommissie&#125;
 &#92;end&#123;enumerate&#125; 
-</code></pre>
-
-After rendering this results in: <br><ul>
+</code></pre><br><br>After rendering this results in: <br><ul>
 
     <li>Akcie</li>
 
@@ -336,18 +309,14 @@ After rendering this results in: <br><ul>
 		<h3>Module Tabular</h3>
 			<p>
     Tabulars in LaTeX are not the most well defined things. This implementation is basic and subject to change. Planned features include multi-rows and columns.
-</p>
-
-<h4>Implemented commands</h4>
+</p><br><br><h4>Implemented commands</h4>
 <ul>
 
     <li><i>tabular:</i> <b>&#92;hline</b><br><p>Add a horizontal line at this position in the table. Maximum of two lines per row.</p></li>
 
     <li><i>tabular:</i> <b>&#92;linewidth</b><br><p>Set the border width of your table cells.</p></li>
 
-</ul>
-
-<h4>Implemented Environments</h4>
+</ul><br><br><h4>Implemented Environments</h4>
 The only environment implemented by this module is the <i>tabular</i> environment. It works just like the tabular in LaTeX:<br><pre><code class="language-latex">&#92;begin&#123;tabular&#125;&#123; l | c || r | &#125;
     &#92;hline
     1 & 2 & 3 &#92;&#92; &#92;hline
@@ -369,37 +338,19 @@ This results in:
 
 	<h2>MarTeX usage</h2>
 		<p>
-Using MarTeX for your website shenanigans is pretty easy. You start by requiring martex.php and construction a MarTeX instance. All MarTeX classes and functions are contained in the MarTeX namespace, so there won't be any collissions with any functions and classes you use yourself.
-
-<pre><code class="language-php">require_once (__DIR__.'/relative/path/to/martex.php');
+Using MarTeX for your website shenanigans is pretty easy. You start by requiring martex.php and construction a MarTeX instance. All MarTeX classes and functions are contained in the MarTeX namespace, so there won't be any collissions with any functions and classes you use yourself.<br><br><pre><code class="language-php">require_once (__DIR__.'/relative/path/to/martex.php');
     
 &#36;Tex = new MarTeX&#92;MarTeX();
-</code></pre>
-
-Then, you require the modules you like and register them to the MarTeX instance.
-
-<pre><code class="language-php">require_once (__DIR__.'/relative/path/to/document.php');
-
-&#36;Document = new MarTeX&#92;Document();
+</code></pre><br><br>Then, you require the modules you like and register them to the MarTeX instance.<br><br><pre><code class="language-php">require_once (__DIR__.'/relative/path/to/document.php');<br><br>&#36;Document = new MarTeX&#92;Document();
 &#36;Tex-&gt;registerModule(&#36;Document);
-</code></pre>
-
-Now you are all set up for TeX'in. Use the parse function with some text. This could be a file, or POST data. If you use POST data, 
+</code></pre><br><br>Now you are all set up for TeX'in. Use the parse function with some text. This could be a file, or POST data. If you use POST data, 
 make sure it is urldecoded and magic quotes are turned off in your php configuration. Otherwise your backslashes in your text could end up being escaped, 
-and MarTeX will interpret them as a double backslash, resulting in a plain old newline.
-
-<pre><code class="language-php">&#36;Tex-&gt;parse(&#36;my_tex_text);
-</code></pre>
-
-We're almost finished. The last thing to do is to check for errors and maybe return them, and returning the output.
-
-<pre><code class="language-php">if (&#36;Tex-&gt;hasError()) {
+and MarTeX will interpret them as a double backslash, resulting in a plain old newline.<br><br><pre><code class="language-php">&#36;Tex-&gt;parse(&#36;my_tex_text);
+</code></pre><br><br>We're almost finished. The last thing to do is to check for errors and maybe return them, and returning the output.<br><br><pre><code class="language-php">if (&#36;Tex-&gt;hasError()) {
     echo &#36;Tex-&gt;getError();
 }
 echo &#36;Tex-&gt;getResult();
-</code></pre>
-
-Please note that, even though we might have errors, the result is still returned. In most cases this works, 
+</code></pre><br><br>Please note that, even though we might have errors, the result is still returned. In most cases this works, 
 since MarTeX will usually just discard commands that cause errors, or make an attempt to fix it. Only on
 serious syntax errors MarTeX will not return any output.
 </p>
@@ -407,21 +358,11 @@ serious syntax errors MarTeX will not return any output.
 	<h2>Module development</h2>
 		<p>
   MarTeX modules are easy to develop. An empty module looks like this: 
-</p>
-
-<pre><code class="language-php">&lt;?php
+</p><br><br><pre><code class="language-php">&lt;?php
 // Add this module to the MarTeX namespace
-namespace MarTeX;
-
-// Include the base class and module tools
-include __DIR__.'/module.php';
-
-// Define the class and extend the MarTeXmodule
-class Helloworld extends MarTeXmodule &#123;
-
-&#125;
-
-?&gt;   
+namespace MarTeX;<br><br>// Include the base class and module tools
+include __DIR__.'/module.php';<br><br>// Define the class and extend the MarTeXmodule
+class Helloworld extends MarTeXmodule &#123;<br><br>&#125;<br><br>?&gt;   
 </code></pre>
 That's all there is to it! You now have a module that does nothing...<br>Some remarks before we get to adding functionality to the module:
 <ul>
@@ -464,9 +405,7 @@ You might notice that we first check if the argument is an array. That is becaus
 The valisani function takes three arguments. The first argument is input, the second number is the supposed number of arguments and the third is for defining the arguments types. This is best demonstrating by adding another command, let's try &#92;multiply&#123;x&#125;&#123;y&#125; with x and y some number:
 <pre><code class="language-php">public function registerCommands() &#123;
   return array("helloworld", "multiply");
-&#125;
-
-public function handleCommand(&#36;command, &#36;argument) &#123;
+&#125;<br><br>public function handleCommand(&#36;command, &#36;argument) &#123;
   switch(&#36;command) &#123;
     case "helloworld":
         &#36;argument = &#36;this-&gt;valisaniArgument(&#36;argument, 0, "");
@@ -477,14 +416,8 @@ public function handleCommand(&#36;command, &#36;argument) &#123;
     &#125;
 &#125;
 </code></pre>
-Normally, for the multiply to work, you'd have to check the numbers yourself, see if there are actually two numbers, cast them to numbers etc, but MarTeX does this for you and will generate warnings if the user inputs invalid arguments or doesn't supply enough of them.
-
-<h4>Environments</h4>
-Environments are areas in MarTeX source that are sandwiched between a begin and end tag. They allow you to do more complex operations on a piece of content. Environments are parsed <u>after</u> commands. You can add an environment to your module by implementing the <i>registerEnvironments</i> and <i>handleEnvironment</i> function.
-
-
-
-
+Normally, for the multiply to work, you'd have to check the numbers yourself, see if there are actually two numbers, cast them to numbers etc, but MarTeX does this for you and will generate warnings if the user inputs invalid arguments or doesn't supply enough of them.<br><br><h4>Environments</h4>
+Environments are areas in MarTeX source that are sandwiched between a begin and end tag. They allow you to do more complex operations on a piece of content. Environments are parsed <u>after</u> commands. You can add an environment to your module by implementing the <i>registerEnvironments</i> and <i>handleEnvironment</i> function.<br><br><br><br>
     <script src='prism.js' type='text/javascript'></script>
 </body>
 </html>

@@ -117,6 +117,14 @@ abstract class MarTeXmodule {
     public function handleSpecialEnvironment($env, $txt) {
         return "";
     }
+    
+    public function getCSS() {
+        return "";
+    }
+    
+    public function getJS() {
+        return "";
+    }
 }
 
 class ModuleTools {

@@ -483,6 +483,35 @@ class MarTeX {
         return $this->_Result;
     }
     
+    /**
+     * Function: getCSS()
+     * Returns:  CSS required to properly render included modules.
+     * Note:     Do this on MarTeX modules updates and include statically.
+     **/
+    public function getCSS() {
+        $css = "";
+        for($i = 0; $i < count($this->_modObjs); $i ++ ) {
+            $css .= $this->_modObjs[$i]->getCSS();
+        }
+        
+        return $css;
+    }
+    
+    /**
+     * Function: getJS()
+     * Returns:  JS required to properly render included modules.
+     * Note:     Do this on MarTeX modules updates and include statically.
+     **/
+    public function getJS() {
+        $js = "";
+        for($i = 0; $i < count($this->_modObjs); $i ++ ) {
+            $js .= $this->_modObjs[$i]->getJS();
+        }
+        
+        return $js;
+    }
+    
+    
     private $_simple_replace_array;
     private $_EnvVars = array();
     private $_GlobalVars = array();

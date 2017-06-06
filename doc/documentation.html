@@ -6,6 +6,9 @@
 
 
 <link href='prism.css' rel='stylesheet' type='text/css' />
+<link href='doc.css' rel='stylesheet' type='text/css' />
+<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML' type='text/javascript'></script>
+<script src='doc.js' type='text/javascript'></script>
 
 </head><body>
 <h1>MarTeX</h1>
@@ -183,11 +186,11 @@ After rendering this results in: <br><h1>My Website</h1>
     <li><i>figure:</i> <b>&#92;label&#123;label text&#125;</b><br><p>Use to give your image a label, 
                                             so you can use <i>&#92;ref&#123;label&#125;</i> to reference it.</p></li>
 
-    <li><i>figure:</i> <b>&#92;width&#123;Width&#125;</b><br><p> Set the width of your image. 
-                    Width can have the following formats: 10px, 10&#37;, 10cm. </p></li>
+    <li><i>figure:</i> <b>&#92;width&#123;Width&#125;</b><br><p>Set the width of your image. 
+                    Width can have the following formats: 10px, 10&#37;, 10cm.</p></li>
 
-    <li><i>figure:</i> <b>&#92;height&#123;Height&#125;</b><br><p> Set the height of your image. 
-                    Height can have the following formats: 10px, 10&#37;, 10cm. </p></li>
+    <li><i>figure:</i> <b>&#92;height&#123;Height&#125;</b><br><p>Set the height of your image. 
+                    Height can have the following formats: 10px, 10&#37;, 10cm.</p></li>
 
     <li><i>figure:</i> <b>&#92;alttext&#123;alt text&#125;</b><br><p>Set the alt text, also called hovertext, of your image.</p></li>
 
@@ -366,6 +369,44 @@ This results in:
 		<td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-bottom: 1px solid black;text-align: left;'>   7</td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-bottom: 1px solid black;border-left: 1px solid black;text-align: center;'>8</td><td style='min-width:20px;min-height:12px;border-top: 1px solid black;border-bottom: 1px solid black;border-right: 1px solid black;border-left: 3px double black;text-align: right;'>9  </td>	</tr>
 	<tr>
 		</table>
+
+		<h3>Module Math</h3>
+		    <p>
+    This module exposes two environments that mimick the LaTeX math environments.
+</p>
+
+<h4>Implemented environments</h4>
+<ul>
+
+    <li><i>equation:</i> <br><p>Render a single equation.</p></li>
+
+    <li><i>eqarray:</i> <br><p>Render a list of equations. Use &amp; as alignment character and &#92;&#92;</p></li>
+
+</ul>
+
+All default LaTeX math commands <b>should</b> be supported. If not, please fix it.
+
+<h4>Example</h4>
+<pre><code class="language-latex">&#92;begin&#123;equation&#125;    &#92;sin(x) + x = x^2
+&#92;end&#123;equation&#125;
+&#92;begin&#123;eqarray&#125;
+    &#92;sin(x) &=& 0 &#92;&#92;
+    1 &=& &#92;cos(x)
+&#92;end&#123;eqarray&#125;</code></pre>
+
+After rendering this results in:<br>$$
+    &#92;sin(x) + x = x^2
+$$
+<table><tr><td>$$
+    &#92;sin(x) = 0
+    1 = &#92;cos(x)
+$$</td></tr></table><br>
+$$
+&#92;mathcal{L} = - &#92;frac{1¦4} F_{&#92;mu &#92;nu} F^{&#92;mu &#92;nu} 
+    + i &#92;bar{&#92;psi} &#92;cancel{D} &#92;psi + h.c. 
+    + &#92;bar{&#92;psi}_i y_{ij} &#92;psi_j &#92;phi + h.c.
+    + |D_&#92;mu &#92;phi|^2 - V(&#92;phi)
+$$
 
 	<h2>MarTeX usage</h2>
 		<p>

@@ -6,6 +6,9 @@
 \usepackage{ifthen}
 
 \link{prism.css}{stylesheet}{text/css}
+\link{doc.css}{stylesheet}{text/css}
+\script{https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML}{text/javascript}
+\script{doc.js}{text/javascript}
 \define{path}{doc}
 \begin{document}
 \title{MarTeX}
@@ -24,6 +27,8 @@
 			\include{itemize}
 		\subsection{Module Tabular}
 			\include{tabular}
+		\subsection{Module Math}
+		    \include{math}
 	\section{MarTeX usage}
 		\include{usage}
 	\section{Module development}

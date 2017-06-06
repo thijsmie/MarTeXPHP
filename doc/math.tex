@@ -1,0 +1,35 @@
+\begin{paragraph}
+    This module exposes two environments that mimick the LaTeX math environments.
+\end{paragraph}
+
+\subsubsection{Implemented environments}
+\begin{itemize}
+    \item{\envdescriptor{equation}{Render a single equation.}}
+    \item{\envdescriptor{eqarray}{Render a list of equations. Use \& as alignment character and \backslash\backslash }}
+\end{itemize}
+
+All default LaTeX math commands \textbf{should} be supported. If not, please fix it.
+
+\subsubsection{Example}
+\begin{code}{latex}\begin{verbatim}\begin{equation}
+    \sin(x) + x = x^2
+\end{equation}
+\begin{eqarray}
+    \sin(x) &=& 0 \\
+    1 &=& \cos(x)
+\end{eqarray}\end{verbatim}\end{code}
+
+After rendering this results in:\\
+\begin{equation}
+    \sin(x) + x = x^2
+\end{equation}
+\begin{eqarray}
+    \sin(x) = 0
+    1 = \cos(x)
+\end{eqarray}
+\begin{equation}
+\mathcal{L} = - \frac{1}{4} F_{\mu \nu} F^{\mu \nu} 
+    + i \bar{\psi} \cancel{D} \psi + h.c. 
+    + \bar{\psi}_i y_{ij} \psi_j \phi + h.c.
+    + |D_\mu \phi|^2 - V(\phi)
+\end{equation}

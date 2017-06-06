@@ -24,8 +24,8 @@ class Verbatim extends MarTeXmodule {
     
     public function handleSpecialEnvironment($env, $text) {
         // Just do some replacin and it'll be fiiiiineeee....
-        $replace = array("/\{/", "/\}/", '/\\\\/');
-        $to = array("&#123;", "&#125;", "&#92;");
+        $replace = array("/\{/", "/\}/", '/\\\\/', '/\</', '/\>/');
+        $to = array("&#123;", "&#125;", "&#92;", "&lt;", "&gt;");
         return trim(preg_replace($replace, $to, $text));
     }
 }

@@ -72,15 +72,18 @@ class Document extends MarTeXmodule {
                 return "<a href='".$argument[0]."'>".$argument[1]."</a>";
             case "par":
                 return "<br><br>";
-			case "begin":
-				$argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");
-				if ($argument == "center"):
-					return "<p style=\"text-align:center;\">";
-				return;
-			case "end":
-				$argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");
-				if ($argument == "center"):
-					return "</p>";
+	    case "begin":
+	        $argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");
+	        if ($argument == "center"){
+		    return "<p style=\"text-align:center;\">";
+                }
+	        return "";
+	    case "end":
+		$argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");
+		if ($argument == "center"){
+		    return "</p>";
+                }
+                return "";
             case "color":
             case "colour":
                 if (!is_array($argument) or count($argument) < 2) {

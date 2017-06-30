@@ -72,18 +72,6 @@ class Document extends MarTeXmodule {
                 return "<a href='".$argument[0]."'>".$argument[1]."</a>";
             case "par":
                 return "<br><br>";
-	    case "begin":
-	        $argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");
-	        if ($argument == "center"){
-		    return "<p style=\"text-align:center;\">";
-                }
-	        return "";
-	    case "end":
-		$argument = $this->valisaniArgument($argument, 1, "String/nowhitespace");
-		if ($argument == "center"){
-		    return "</p>";
-                }
-                return "";
             case "color":
             case "colour":
                 if (!is_array($argument) or count($argument) < 2) {
@@ -176,7 +164,7 @@ class Document extends MarTeXmodule {
     }
     
     public function registerEnvironments() {
-        return array("document", "paragraph", "code");
+        return array("document", "paragraph", "center", "code");
     }
     
     public function handleEnvironment($env, $options, $text) {
@@ -185,6 +173,8 @@ class Document extends MarTeXmodule {
                 return $text;
             case "paragraph":
                 return "<p>".$text."</p>";
+            case "center":
+                return "<div style=\"text-align: center\">".$text."</div>";
             case "code":
                 if (is_array($options)) {
                     return '<pre><code class="language-'.$options[1].'">'.$this->str_replace_first("\n","",$text)."</code></pre>";
